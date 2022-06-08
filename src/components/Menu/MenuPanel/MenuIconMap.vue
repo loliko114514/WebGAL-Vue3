@@ -1,52 +1,20 @@
-<!-- <template>
-  <v-switch :case="props.iconName">
-  <template  #save>
-    <Save theme="outline" size="1.2em" :fill="props.iconColor" strokeWidth="2"/>
-  </template>
-  <template  #load>
-    <FolderOpen theme="outline" size="1.2em" :fill="props.iconColor" strokeWidth="2"/>
-  </template>
-  <template  #option>
-    <SettingTwo theme="outline" size="1.2em" :fill="props.iconColor" strokeWidth="2"/>
-  </template>
-  <template  #title>
-    <Home theme="outline" size="1.2em" fill="rgba(185,185,185,1)" strokeWidth="2"/>
-  </template>
-  <template  #exit>
-    <Logout theme="outline" size="1.2em" fill="rgba(185,185,185,1)" strokeWidth="2"/>
-  </template>
-  </v-switch>
-</template> -->
+<template>
+   <n-icon v-if="props.iconName==='save'" :color="props.iconColor.toString()" size="32" :component="SaveOutline" />
+   <n-icon v-if="props.iconName==='load'" :color="props.iconColor.toString()" size="32" :component="FolderOpenOutline" />
+   <n-icon v-if="props.iconName==='option'" :color="props.iconColor.toString()" size="32" :component="SettingsOutline" />
+   <n-icon v-if="props.iconName==='title'" color="rgba(185, 185, 185, 1)" size="32" :component="HomeOutline" />
+   <n-icon v-if="props.iconName==='exit'" color="rgba(185, 185, 185, 1)" size="32" :component="ExitOutline" />
+</template>
 
-<script lang='ts'>
-import  {FolderOpen, Home, Logout, Save, SettingTwo } from "@icon-park/vue"
-import {defineComponent, h, render } from "vue";
-import VSwitch from '../../SwitchTool/VSwitch.vue';
-export default defineComponent({
-  props:{
-    iconName:String,
+<script setup lang='ts'>
+import { SaveOutline, FolderOpenOutline, SettingsOutline, HomeOutline, ExitOutline } from '@vicons/ionicons5'
+import { NIcon } from 'naive-ui'
+  const props = defineProps<{
     iconColor:String
-  },
-  setup(props){
-    props.iconName,
-    props.iconColor
-  },
-  render(){
-    console.log(this.iconName)
-    switch(this.iconName){
-      case "save":
-        return h('Save',{theme:'outline',size:'1.2em',fill:this.iconColor,strokeWidth:'2'})
-      case "load":
-        return h('FolderOpen',{theme:'outline',size:'1.2em',fill:this.iconColor,strokeWidth:'2'})
-      case "option":
-        return h('SettingTwo',{theme:'outline',size:'1.2em',fill:this.iconColor,strokeWidth:'2'})
-      case "title":
-        return h('Home',{theme:'outline',size:'1.2em',fill:this.iconColor,strokeWidth:'2'})
-      case "exit":
-        return h('Logout',{theme:'outline',size:'1.2em',fill:this.iconColor,strokeWidth:'2'})
-    }
-  }
-})
+    iconName:String
+  }>()
+  console.log(props.iconColor+' '+props.iconName)
+
 </script>
 
 <style lang="scss" scoped>

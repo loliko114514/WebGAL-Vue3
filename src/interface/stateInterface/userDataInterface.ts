@@ -57,3 +57,19 @@ export interface ISaveData {
   saveData: Array<ISaveData> // 用户存档数据
   optionData: IOptionData // 用户设置选项数据
 }
+
+export interface IAppreciationAsset {
+  name: string;
+  url: string;
+  series:string;
+}
+
+export interface ISetOptionDataPayload {
+  key: keyof IOptionData;
+  value: any;
+}
+
+export interface ISetUserDataPayload {
+  key: keyof IUserData;
+  value: any;
+}

@@ -1,6 +1,6 @@
 <template>
   <div :class="buttonClassName"
-    style="color: props.tagColor"
+    :style="`color: ${props.tagColor}`"
     @click="()=>{props.clickFunc()}"
   >
     <div class="MenuPanel_button_icon">
@@ -52,6 +52,12 @@ interface IMenuPanel {
 
 .MenuPanel_button:last-child {
     border-right: none;
+}
+
+.MenuPanel_button_icon {
+    transform: translate(0, 0.05em);
+    padding: 0.10em 0.15em 0 0;
+    margin: 0.10em 0.15em 0 0;
 }
 
 </style>

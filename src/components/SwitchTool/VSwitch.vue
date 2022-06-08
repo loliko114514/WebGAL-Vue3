@@ -1,6 +1,5 @@
 <script lang='ts'>
-  import { defineComponent ,h } from 'vue';
-  import  {FolderOpen, Home, Logout, Save, SettingTwo } from "@icon-park/vue"
+  import { defineComponent  } from 'vue'
   import { Slots } from 'vue';
   export default defineComponent({
     props:["case"],
