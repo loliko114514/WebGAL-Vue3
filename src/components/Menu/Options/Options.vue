@@ -13,10 +13,73 @@
           <NormalButton 
           :textList="['慢', '中', '快']" 
           :functionList="[
-            ()=>{
-              
-            }
-          ]"></NormalButton>
+            ()=>{userdataStore.setTextSpeed(PlaySpeed.slow)
+              userdataStore.setStorage()},
+            ()=>{userdataStore.setTextSpeed(PlaySpeed.normal)
+            userdataStore.setStorage()},
+            ()=>{userdataStore.setTextSpeed(PlaySpeed.fast)
+            userdataStore.setStorage()},
+          ]"
+          :currentChecked="userdataStore.initState.optionData.textSpeed"></NormalButton>
+        </NormalOption>
+        <NormalOption key="option1" title="自动播放速度">
+          <NormalButton 
+          :textList="['慢', '中', '快']" 
+          :functionList="[
+            ()=>{userdataStore.setAutoSpeed(PlaySpeed.slow)
+            userdataStore.setStorage()},
+            ()=>{userdataStore.setAutoSpeed(PlaySpeed.normal)
+            userdataStore.setStorage()},
+            ()=>{userdataStore.setAutoSpeed(PlaySpeed.fast)
+            userdataStore.setStorage()},
+          ]"
+          :currentChecked="userdataStore.initState.optionData.autoSpeed"></NormalButton>
+        </NormalOption>
+        <NormalOption key="option2" title="文本大小">
+          <NormalButton 
+          :textList="['小', '中', '大']" 
+          :functionList="[
+            ()=>{userdataStore.setTextSize(TextSize.small)
+            userdataStore.setStorage()},
+            ()=>{userdataStore.setTextSize(TextSize.medium)
+            userdataStore.setStorage()},
+            ()=>{userdataStore.setTextSize(TextSize.large)
+            userdataStore.setStorage()},
+          ]"
+          :currentChecked="userdataStore.initState.optionData.textSize"></NormalButton>
+        </NormalOption>
+        <NormalOption key="option3" title="文本显示预览">
+          <TextPreview />
+        </NormalOption>
+      </div>
+
+      <div>
+        <NormalOption key="option4" title="主音量">
+          <OptionSlider :initValue="userdataStore.initState.optionData.volumeMain"
+            uniqueID="主音量" :onChange="(event:any) => {
+              userdataStore.initState.optionData.volumeMain = parseInt(event.target.value)
+              userdataStore.setStorage();
+              userdataStore.setVolume();
+            }"
+          />
+        </NormalOption>
+        <NormalOption key="option5" title="语音音量">
+          <OptionSlider :initValue="userdataStore.initState.optionData.volumeMain"
+            uniqueID="语音音量" :onChange="(event:any) => {
+              userdataStore.initState.optionData.vocalVolume = parseInt(event.target.value)
+              userdataStore.setStorage();
+              userdataStore.setVolume();
+            }"
+          />
+        </NormalOption>
+        <NormalOption key="option6" title="背景音乐音量">
+          <OptionSlider :initValue="userdataStore.initState.optionData.volumeMain"
+            uniqueID="背景音乐音量" :onChange="(event:any) => {
+              userdataStore.initState.optionData.bgmVolume = parseInt(event.target.value)
+              userdataStore.setStorage();
+              userdataStore.setVolume();
+            }"
+          />
         </NormalOption>
       </div>
     </div>
@@ -26,6 +89,14 @@
 <script setup lang='ts'>
 import NormalOption from './NormalOption.vue';
 import NormalButton from './NormalButton.vue';
+import OptionSlider from './OptionSlider.vue';
+import TextPreview from './TextPreview.vue';
+import { PlaySpeed,TextSize } from '../../../interface/stateInterface/userDataInterface'
+import { UserDataStore } from '../../../store/UserDataStore'
+import { ref } from 'vue';
+
+const userdataStore = UserDataStore()
+
 </script>
 
 <style lang="scss" scoped>

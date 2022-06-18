@@ -13,7 +13,6 @@ import { NIcon } from 'naive-ui'
     iconColor:String
     iconName:String
   }>()
-  console.log(props.iconColor+' '+props.iconName)
 
 </script>
 

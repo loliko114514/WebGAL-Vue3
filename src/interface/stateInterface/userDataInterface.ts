@@ -3,13 +3,13 @@ import { IStageState } from './stageInterface';
 /**
  * 播放速度的枚举类型
  */
- export enum playSpeed {
+ export enum PlaySpeed {
   slow, // 慢
   normal, // 中
   fast, // 快
 }
 
-export enum textSize {
+export enum TextSize {
   small,
   medium,
   large,
@@ -20,9 +20,9 @@ export enum textSize {
  */
  export interface IOptionData {
   volumeMain: number // 主音量
-  textSpeed: playSpeed // 文字速度
-  autoSpeed: playSpeed // 自动播放速度
-  textSize: textSize
+  textSpeed: PlaySpeed // 文字速度
+  autoSpeed: PlaySpeed // 自动播放速度
+  textSize: TextSize
   vocalVolume: number // 语音音量
   bgmVolume: number // 背景音乐音量
   slPage: number // 存读档界面所在页面

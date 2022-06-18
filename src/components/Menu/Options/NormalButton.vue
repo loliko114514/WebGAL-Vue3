@@ -1,11 +1,11 @@
 <template>
     <div 
-      v-for="i in props.textList.length-1"
-      :key="props.textList[i] + i"
-      :class="`NormalButton ${props.currentChecked===i?'NormalButtonChecked':''}`"
-      @click="props.functionList[i]"
+      v-for="i in props.textList.length"
+      :key="props.textList[i-1] + i"
+      :class="`NormalButton ${props.currentChecked===i-1?'NormalButtonChecked':''}`"
+      @click="props.functionList[i-1]"
     >
-      {{props.textList[i]}}
+      {{props.textList[i-1]}}
     </div>
 </template>
 
@@ -15,6 +15,7 @@
     functionList: Array<any>
     currentChecked: number
   }>()
+  console.log('functionList',props.functionList)
 </script>
 
 <style lang="scss" scoped>
