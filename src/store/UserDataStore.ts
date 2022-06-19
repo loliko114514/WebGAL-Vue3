@@ -42,7 +42,6 @@ export const UserDataStore = defineStore('UserDataStore',{
 
       },
       setVolume(){
-        console.log("主音量", this.initState.optionData.volumeMain)
       }
     }
 })
