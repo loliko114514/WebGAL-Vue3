@@ -9,6 +9,7 @@
   </div>
 </template>
 
+
 <script setup lang='ts'>
 import { webgal_env } from '../../../env/webgal_env';
 import { ref,watch } from 'vue';
