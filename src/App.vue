@@ -1,5 +1,5 @@
 <template>
-  <Menu-vue v-if="guiStore.iGuiState.showMenuPanel"/>
+  <Menu-vue v-if="guiStore.guiState.showMenuPanel"/>
   <Title-vue/>
 </template>
 <script setup lang="ts">

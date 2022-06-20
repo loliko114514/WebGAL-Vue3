@@ -17,17 +17,17 @@ import { ref,watch } from 'vue';
 import { UserDataStore } from '../../../store/UserDataStore';
 
 const userdataStore=UserDataStore()
-let textDelay = ref(webgal_env.textInitialDelay - 20*userdataStore.initState.optionData.textSpeed)
-let size = ref(50*userdataStore.initState.optionData.textSize+200+'%')
+let textDelay = ref(webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed)
+let size = ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
 const previewText = '现在预览的是文本框字体大小和播放速度的情况，您可以根据您的观感调整上面的选项。'
 watch(
-  ()=>userdataStore.initState.optionData.textSize,
+  ()=>userdataStore.userDataState.optionData.textSize,
   (val)=>{
     size.value = 50*val+200+'%'
   }
 )
 watch(
-  ()=>userdataStore.initState.optionData.textSpeed,
+  ()=>userdataStore.userDataState.optionData.textSpeed,
   (val)=>{
     textDelay.value = webgal_env.textInitialDelay - 20*val
     console.log('textDelay.value',textDelay.value)

@@ -1,8 +1,5 @@
 import { defineStore } from "pinia"
 import { 
-  IAppreciationAsset,
-  ISetOptionDataPayload,
-  ISetUserDataPayload,
   IUserData,
   PlaySpeed,
   TextSize } from '../interface/stateInterface/userDataInterface'
@@ -10,7 +7,7 @@ import {
 export const UserDataStore = defineStore('UserDataStore',{
     state:()=>{
       return {
-        initState:<IUserData>{
+        userDataState:<IUserData>{
           saveData: [],
           optionData: {
             slPage: 1,
@@ -20,7 +17,7 @@ export const UserDataStore = defineStore('UserDataStore',{
             textSize: TextSize.medium,
             vocalVolume: 100, // 语音音量
             bgmVolume: 25, // 背景音乐音量
-          },
+          }, 
           appreciationData: {
             bgm: [],
             cg: []
@@ -30,13 +27,13 @@ export const UserDataStore = defineStore('UserDataStore',{
     },
     actions:{
       setTextSpeed(speed:PlaySpeed){
-        this.initState.optionData.textSpeed = speed
+        this.userDataState.optionData.textSpeed = speed
       },
       setAutoSpeed(speed:PlaySpeed){
-        this.initState.optionData.autoSpeed = speed
+        this.userDataState.optionData.autoSpeed = speed
       },
       setTextSize(size:TextSize){
-        this.initState.optionData.textSize = size
+        this.userDataState.optionData.textSize = size
       },
       setStorage(){
 

@@ -22,7 +22,7 @@ import { GuiStore } from "../../store/GuiStore";
 import { MenuPanelTag }from "../../interface/stateInterface/guiInterface"
 
 const guiStore = GuiStore()
-const currentMenuTag = ref(guiStore.iGuiState.currentMenuTag)
+const currentMenuTag = ref(guiStore.guiState.currentMenuTag)
 console.log('currentMenuTag',currentMenuTag)
 </script>
    

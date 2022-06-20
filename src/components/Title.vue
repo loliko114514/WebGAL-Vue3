@@ -29,7 +29,7 @@
 import { GuiStore } from '../store/GuiStore'
 import { ref } from 'vue';
 const guiStore = GuiStore()
-let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.iGuiState.titleBg}.png)`)
+let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.guiState.titleBg}.png)`)
   const hideTitle = ():void=>{
     console.log("开始游戏")
   }
@@ -37,8 +37,8 @@ let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.iGuiState.ti
     console.log("继续游戏")
   }
   const showMenuOption = ():void=>{
-    guiStore.iGuiState.showMenuPanel=true
-    console.log(guiStore.iGuiState.showMenuPanel)
+    guiStore.guiState.showMenuPanel=true
+    console.log(guiStore.guiState.showMenuPanel)
   }
   const onLoadGame = ():void=>{
     console.log("读取存档")

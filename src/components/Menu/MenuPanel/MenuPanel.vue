@@ -37,7 +37,7 @@ import { ref } from 'vue'
 import { GuiStore } from '../../../store/GuiStore'
 import { MenuPanelTag } from '../../../interface/stateInterface/guiInterface'
 import MenuPanelButton from './MenuPanelButton.vue';
-  const guistate = GuiStore().iGuiState
+  const guistate = GuiStore().guiState
     // 设置Menu按钮的高亮
   const SaveTagOn = guistate.currentMenuTag === MenuPanelTag.Save ? ` ${undefined}` : ``;
   const LoadTagOn = guistate.currentMenuTag === MenuPanelTag.Load ? ` ${undefined}` : ``;

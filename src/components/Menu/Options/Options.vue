@@ -20,7 +20,7 @@
             ()=>{userdataStore.setTextSpeed(PlaySpeed.fast)
             userdataStore.setStorage()},
           ]"
-          :currentChecked="userdataStore.initState.optionData.textSpeed"></NormalButton>
+          :currentChecked="userdataStore.userDataState.optionData.textSpeed"></NormalButton>
         </NormalOption>
         <NormalOption key="option1" title="自动播放速度">
           <NormalButton 
@@ -33,7 +33,7 @@
             ()=>{userdataStore.setAutoSpeed(PlaySpeed.fast)
             userdataStore.setStorage()},
           ]"
-          :currentChecked="userdataStore.initState.optionData.autoSpeed"></NormalButton>
+          :currentChecked="userdataStore.userDataState.optionData.autoSpeed"></NormalButton>
         </NormalOption>
         <NormalOption key="option2" title="文本大小">
           <NormalButton 
@@ -46,7 +46,7 @@
             ()=>{userdataStore.setTextSize(TextSize.large)
             userdataStore.setStorage()},
           ]"
-          :currentChecked="userdataStore.initState.optionData.textSize"></NormalButton>
+          :currentChecked="userdataStore.userDataState.optionData.textSize"></NormalButton>
         </NormalOption>
         <NormalOption key="option3" title="文本显示预览">
           <TextPreview />
@@ -55,27 +55,27 @@
 
       <div>
         <NormalOption key="option4" title="主音量">
-          <OptionSlider :initValue="userdataStore.initState.optionData.volumeMain"
+          <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
             uniqueID="主音量" :onChange="(event:any) => {
-              userdataStore.initState.optionData.volumeMain = parseInt(event.target.value)
+              userdataStore.userDataState.optionData.volumeMain = parseInt(event.target.value)
               userdataStore.setStorage();
               userdataStore.setVolume();
             }"
           />
         </NormalOption>
         <NormalOption key="option5" title="语音音量">
-          <OptionSlider :initValue="userdataStore.initState.optionData.volumeMain"
+          <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
             uniqueID="语音音量" :onChange="(event:any) => {
-              userdataStore.initState.optionData.vocalVolume = parseInt(event.target.value)
+              userdataStore.userDataState.optionData.vocalVolume = parseInt(event.target.value)
               userdataStore.setStorage();
               userdataStore.setVolume();
             }"
           />
         </NormalOption>
         <NormalOption key="option6" title="背景音乐音量">
-          <OptionSlider :initValue="userdataStore.initState.optionData.volumeMain"
+          <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
             uniqueID="背景音乐音量" :onChange="(event:any) => {
-              userdataStore.initState.optionData.bgmVolume = parseInt(event.target.value)
+              userdataStore.userDataState.optionData.bgmVolume = parseInt(event.target.value)
               userdataStore.setStorage();
               userdataStore.setVolume();
             }"
