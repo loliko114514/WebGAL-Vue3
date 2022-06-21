@@ -4,7 +4,9 @@
       <div class="Save_Load_title">
         <div class="Save_title_text">存档</div>
       </div>
-      <div class="Save_Load_top_buttonList">{{page}}</div>
+      <div class="Save_Load_top_buttonList">
+        <Page/>
+      </div>
     </div>
     <div
       class="Save_Load_content"
@@ -17,6 +19,7 @@
 
 <script setup lang='ts'>
 import ShowElements from './ShowElements.vue';
+import Page from './Page.vue';
 import { UserDataStore } from '../../../store/UserDataStore';
 
 const userdataStore = UserDataStore()
