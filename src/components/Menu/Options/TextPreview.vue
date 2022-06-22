@@ -15,24 +15,19 @@ import { webgal_env } from '../../../env/webgal_env';
 import { ref,watch } from 'vue';
 
 import { UserDataStore } from '../../../store/UserDataStore';
+import { computed } from '@vue/reactivity';
 
 const userdataStore=UserDataStore()
-let textDelay = ref(webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed)
-let size = ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
+// let textDelay = ref(webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed)
+// let size = ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
 const previewText = '现在预览的是文本框字体大小和播放速度的情况，您可以根据您的观感调整上面的选项。'
-watch(
-  ()=>userdataStore.userDataState.optionData.textSize,
-  (val)=>{
-    size.value = 50*val+200+'%'
-  }
-)
-watch(
-  ()=>userdataStore.userDataState.optionData.textSpeed,
-  (val)=>{
-    textDelay.value = webgal_env.textInitialDelay - 20*val
-    console.log('textDelay.value',textDelay.value)
-  }
-)
+let textDelay = computed(()=>{
+  return webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed
+})
+let size = computed(()=>{
+  return ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
+})
+
 
 </script>
 

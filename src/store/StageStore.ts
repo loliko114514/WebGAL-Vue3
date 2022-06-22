@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { IStageState } from "../interface/stateInterface/stageInterface"
 
-export const GuiStore = defineStore('StageStore',{
+export const StageStore = defineStore('StageStore',{
   state:()=>{
     return {
       stageState:<IStageState> {

@@ -1,5 +1,4 @@
 import { defineStore } from "pinia"
-import { IStageState } from '../interface/stateInterface/stageInterface'
 import { IGuiState,MenuPanelTag } from '../interface/stateInterface/guiInterface'
 
 export const GuiStore = defineStore('GuiStore',{

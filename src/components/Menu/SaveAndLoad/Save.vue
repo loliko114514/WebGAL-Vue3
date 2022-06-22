@@ -12,17 +12,18 @@
       class="Save_Load_content"
       :id="'Save_content_page_' + userdataStore.userDataState.optionData.slPage"
     >
-      <ShowElements/>
+      <ShowSave/>
     </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import ShowElements from './ShowElements.vue';
+import ShowSave from './ShowSave.vue';
 import Page from './Page.vue';
 import { UserDataStore } from '../../../store/UserDataStore';
 
 const userdataStore = UserDataStore()
+
 </script>
 
 <style lang="scss" scoped>

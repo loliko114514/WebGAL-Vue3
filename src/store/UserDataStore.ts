@@ -35,10 +35,14 @@ export const UserDataStore = defineStore('UserDataStore',{
       setTextSize(size:TextSize){
         this.userDataState.optionData.textSize = size
       },
-      setStorage(){
+      setStorage(){//更新本地缓存
 
       },
-      setVolume(){
+      setVolume(){//设置音量
+
+      },
+      setSlPage(page:number){//设置当前存读界面页数
+        this.userDataState.optionData.slPage = page
       }
     }
 })
