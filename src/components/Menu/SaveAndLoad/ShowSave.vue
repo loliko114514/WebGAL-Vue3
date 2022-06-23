@@ -1,18 +1,68 @@
 <template>
-  <div @click="controllerSotre.saveGame(1)">
-
+  <div
+    v-for="i in list"
+    @click="controllerSotre.saveGame(1)"
+    :key="'saveElement'+i"
+    class="Save_Load_content_element"
+    :style="{'animation-delay':i*30+'ms'}"
+    >
+    <div class="Save_Load_content_element_top">
+      <div class="Save_Load_content_element_top_index">{{saveData[i].index}}</div>
+      <div class="Save_Load_content_element_top_date">{{saveData[i].saveTime}}</div>
+    </div>
+    <div class="Save_Load_content_miniRen">
+      <img v-if="saveData[i].nowStageState.bgName!==''"
+        class="Save_Load_content_miniRen_bg"
+        alt="Save_img_preview"
+        :src="saveData[i].nowStageState.bgName"
+      />
+      <div v-if="saveData[i].nowStageState.bgName!==''" :style="{'background':'rgba(0,0,0,0.6)','width':'100%', 'height': '100%'}"></div>
+      <img v-if="saveData[i].nowStageState.figNameLeft!==''"
+        class="Save_Load_content_miniRen_figure Save_Load_content_miniRen_figLeft"
+        alt="Save_img_previewLeft"
+        :src="saveData[i].nowStageState.figNameLeft"
+      />
+      <img v-if="saveData[i].nowStageState.figNameRight!==''"
+        class="Save_Load_content_miniRen_figure Save_Load_content_miniRen_figRight"
+        alt="Save_img_previewRight"
+        :src="saveData[i].nowStageState.figNameRight"
+      />
+      <div v-if="saveData[i].nowStageState.figName!==''" 
+        class="Save_Load_content_miniRen_figMiddle">
+          <img class="Save_Load_content_miniRen_figure"
+            alt="Save_img_preview"
+            :src="saveData[i].nowStageState.figName" />
+      </div>
+    </div>
+    <div class="styles.Save_Load_content_text">
+      <div class="styles.Save_Load_content_speaker">{{saveData[i].nowStageState.showName}}</div>
+      <div class="styles.Save_Load_content_text_padding">{{saveData[i].nowStageState.showText}}</div>
+    </div>
   </div>
 </template>
 
 <script setup lang='ts'>
-import { ref } from 'vue';
+import { ref,reactive } from 'vue';
 import { UserDataStore } from '../../../store/UserDataStore';
 import { ControllerSotre } from '../../../store/ControllerStore';
+import { computed } from '@vue/reactivity';
 
 const controllerSotre = ControllerSotre()
 const userdataStore = UserDataStore()
-const start = ref((userdataStore.userDataState.optionData.slPage-1)*10+1)
-const end = ref(start.value+9)
+let list = computed(()=>{
+  const start = (userdataStore.userDataState.optionData.slPage-1)*10+1
+  let list = new Array(10)
+  for(let i=start;i<start+10;i++){
+  list.push(i)
+  }
+  return list
+})
+const saveData = reactive(computed(()=>{
+  return userdataStore.userDataState.saveData
+}))
+
+
+
 
 </script>
 
@@ -151,6 +201,16 @@ const end = ref(start.value+9)
   bottom: 0;
   right: 0;
 }
+
+.Save_Load_content_miniRen_figMiddle{
+  display: 'flex';
+  width: '100%';
+  height: '100%';
+  position: 'absolute';
+  bottom: '0';
+  justify-content: 'center';
+}
+
 
 @keyframes Elements_in {
   0% {

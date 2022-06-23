@@ -1,11 +1,13 @@
 <template>
   <div class="textPreviewMain">
     <span 
-    v-for="(e,i) in previewText"
-    :id="'text'+i" 
-    class="singleText"
-    :style="{ 'animation-delay' : textDelay*i + 'ms'}"
-    >{{e}}</span>
+      v-for="(e,i) in previewText"
+      :id="'text'+i" 
+      class="singleText"
+      :style="{ 'animation-delay' : textDelay*i + 'ms'}"
+      >
+    {{e}}
+    </span>
   </div>
 </template>
 
