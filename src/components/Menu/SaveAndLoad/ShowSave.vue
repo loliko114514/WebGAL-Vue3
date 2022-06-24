@@ -57,9 +57,10 @@ let list = computed(()=>{
   }
   return list
 })
-const saveData = reactive(computed(()=>{
+
+let saveData = computed(()=>{
   return userdataStore.userDataState.saveData
-}))
+})
 
 
 

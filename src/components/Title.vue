@@ -37,8 +37,7 @@ let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.guiState.tit
     console.log("继续游戏")
   }
   const showMenuOption = ():void=>{
-    guiStore.guiState.showMenuPanel=true
-    console.log(guiStore.guiState.showMenuPanel)
+    guiStore.setShowMenuPanel(true)
   }
   const onLoadGame = ():void=>{
     console.log("读取存档")

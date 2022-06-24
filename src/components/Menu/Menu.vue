@@ -1,13 +1,10 @@
 <template>
   <div class="Menu_main">
     <div class="Menu_TagContent">
-      <template v-if="currentMenuTag===MenuPanelTag.Save">
-        <div>tem1</div>
-      </template>
-      <template  v-if="currentMenuTag===MenuPanelTag.Load">
-        <div>tem2</div>
-      </template>
-      <Options  v-if="currentMenuTag===MenuPanelTag.Option"/>
+      <Save v-if="currentMenuTag===MenuPanelTag.Save" />
+      <!-- <template  v-if="currentMenuTag===MenuPanelTag.Load">
+      </template> -->
+      <Options v-if="currentMenuTag===MenuPanelTag.Option"/>
     </div>
     <MenuPanel/>
   </div>
@@ -16,14 +13,16 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
 import MenuPanel from './MenuPanel/MenuPanel.vue';
-import VSwitch from '../SwitchTool/VSwitch.vue';
+import Save from './SaveAndLoad/Save.vue';
 import Options from './Options/Options.vue';
 import { GuiStore } from "../../store/GuiStore";
 import { MenuPanelTag }from "../../interface/stateInterface/guiInterface"
+import { computed } from '@vue/reactivity';
 
 const guiStore = GuiStore()
-const currentMenuTag = ref(guiStore.guiState.currentMenuTag)
-console.log('currentMenuTag',currentMenuTag)
+const currentMenuTag = computed(()=>{
+  return guiStore.guiState.currentMenuTag
+})
 </script>
    
 <style  lang="scss" scoped>

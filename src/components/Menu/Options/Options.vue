@@ -1,9 +1,8 @@
 <template>
-  <div class="styles.Options_main">
-
-    <div class="styles.Options_top">
-      <div class="styles.Options_title">
-        <div class="styles.Option_title_text">选项</div>
+  <div class="Options_main">
+    <div class="Options_top">
+      <div class="Options_title">
+        <div class="Option_title_text">选项</div>
       </div>
     </div>
 
@@ -123,6 +122,36 @@ const userdataStore = UserDataStore()
   //background-color: rgba(255, 255, 255, 0.99);
   //border-right: .2em solid rgba(81, 110, 65, 0.9);
   //box-shadow: .1em .1em .8em .2em rgba(0, 0, 0, 0.07);
+}
+.Option_title_text {
+  font-size: 165%;
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(to left, #227D51, rgba(81, 110, 65, 1));
+  -webkit-background-clip: text;
+  animation: Elements_in ease-out 0.7s forwards;
+}
+
+.Option_title_text_shadow {
+  position: absolute;
+  color: rgba(0, 0, 0, 0);
+  -webkit-text-stroke: 3px rgba(0, 0, 0, 1);
+  z-index: -1;
+}
+
+.Option_title_text_ts {
+  position: absolute;
+  color: rgba(0, 0, 0, 0);
+  text-shadow: 0.04em 0.04em rgba(81, 110, 65, 0.9),
+  0.05em 0.05em rgba(81, 110, 65, 0.9),
+  0.06em 0.06em rgba(81, 110, 65, 0.9),
+  0.07em 0.07em rgba(81, 110, 65, 0.9);
+  //0.08em 0.08em rgba(81, 110, 65, 0.9),
+  //0.09em 0.09em rgba(81, 110, 65, 0.9),
+  //0.10em 0.10em rgba(81, 110, 65, 0.9),
+  //0.11em 0.11em rgba(81, 110, 65, 0.9),
+  //0.12em 0.12em rgba(81, 110, 65, 0.9);
+  z-index: -1;
 }
 .Options_main_content {
   height: 85%;

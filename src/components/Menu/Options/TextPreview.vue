@@ -1,6 +1,7 @@
 <template>
   <div class="textPreviewMain">
     <span 
+      :key="key"
       v-for="(e,i) in previewText"
       :id="'text'+i" 
       class="singleText"
@@ -13,7 +14,7 @@
 
 
 <script setup lang='ts'>
-import { webgal_env } from '../../../env/webgal_env';
+import { webgal_env } from '../../../configs/webgal_env';
 import { ref,watch } from 'vue';
 
 import { UserDataStore } from '../../../store/UserDataStore';
@@ -23,13 +24,19 @@ const userdataStore=UserDataStore()
 // let textDelay = ref(webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed)
 // let size = ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
 const previewText = '现在预览的是文本框字体大小和播放速度的情况，您可以根据您的观感调整上面的选项。'
+let key = ref(0)
 let textDelay = computed(()=>{
   return webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed
 })
-let size = computed(()=>{
-  return ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
+watch(textDelay,()=>{
+  key.value++
 })
-
+let size = computed(()=>{
+  return 50*userdataStore.userDataState.optionData.textSize+200+'%'
+})
+watch(size,()=>{
+  key.value++
+})
 
 </script>
 
@@ -40,7 +47,7 @@ let size = computed(()=>{
   padding: 1em 1.5em 1em 1.5em;
   background: rgba(0, 0, 0, 0.35);
   color: rgb(255, 255, 255);
-  min-height: 170px;
+  min-height: 210px;
 }
 
 .singleText {

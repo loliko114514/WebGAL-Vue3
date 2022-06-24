@@ -1,9 +1,10 @@
 <template>
   <div 
   v-for="i in 20"
-  @click="
-  userdateStore.setSlPage(i)
-  setStorage()
+  @click="()=>{
+    userdateStore.setSlPage(i)
+    userdateStore.setStorage()
+  }
   "
   :key="'Save_element_page'+i"
   :class="`Save_Load_top_button ${userdateStore.userDataState.optionData.slPage===i?'Save_Load_top_button_on':''}`">

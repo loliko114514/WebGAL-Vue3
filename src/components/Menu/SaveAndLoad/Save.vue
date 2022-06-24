@@ -12,7 +12,7 @@
       class="Save_Load_content"
       :id="'Save_content_page_' + userdataStore.userDataState.optionData.slPage"
     >
-      <ShowSave/>
+      <ShowSave v-if="userdataStore.userDataState.saveData.length!==0"/>
     </div>
   </div>
 </template>
@@ -66,6 +66,19 @@ const userdataStore = UserDataStore()
   background: linear-gradient(135deg, #77428D 0%, #B28FCE 100%);
   text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5);
   -webkit-background-clip: text;
+}
+.Save_Load_top_buttonList {
+  height: 100%;
+  display: flex;
+  padding: 0 0 0 2em;
+}
+.Save_Load_content {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 </style>

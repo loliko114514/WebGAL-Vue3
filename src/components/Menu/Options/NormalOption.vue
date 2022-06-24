@@ -1,8 +1,9 @@
 <template>
   <div  class="NormalOption">
     <div class="NormalOption_title">{{props.title}}</div>
-    <div class="NormalOption_buttonList">{{props.children}}</div>
-    <slot></slot>
+    <div class="NormalOption_buttonList">
+      <slot></slot>
+    </div>
   </div>
 </template>
 

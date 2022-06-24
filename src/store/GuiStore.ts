@@ -15,6 +15,14 @@ export const GuiStore = defineStore('GuiStore',{
       }
     },
     actions:{
-      
+      setCurrentMenuTag(tag:MenuPanelTag){
+        this.guiState.currentMenuTag=tag
+      },
+      setShowTitle(showTitle:boolean){
+        this.guiState.showTitle = showTitle
+      },
+      setShowMenuPanel(showMenuPanel:boolean){
+        this.guiState.showMenuPanel = showMenuPanel
+      }
     }
 })

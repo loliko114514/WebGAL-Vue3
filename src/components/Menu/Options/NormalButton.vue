@@ -15,7 +15,6 @@
     functionList: Array<any>
     currentChecked: number
   }>()
-  console.log('functionList',props.functionList)
 </script>
 
 <style lang="scss" scoped>
