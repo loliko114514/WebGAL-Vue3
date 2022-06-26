@@ -43,6 +43,9 @@ export const UserDataStore = defineStore('UserDataStore',{
       },
       setSlPage(page:number){//设置当前存读界面页数
         this.userDataState.optionData.slPage = page
-      }
+      },
+      resetUserData(userDataState:IUserData){
+        Object.assign(this.userDataState,userDataState)
+      },
     }
 })

@@ -83,23 +83,23 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <script>
-      let enterPromise=new Promise(res=>window.enterPromise=res)
-      let renderPromise=new Promise(res=>window.renderPromise=res)
-         /**
-           * 将播放bgm的事件发送出去
-           */
-      Promise.all([enterPromise,renderPromise])
-      .then(()=>{
-          const event = new MouseEvent('click', {
-              'view': window,
-              'bubbles': true,
-              'cancelable': true,
-          });
-          const target = document.getElementById('play_title_bgm_target');
-          if (target !== null) {
-              target.dispatchEvent(event);
-          }
-      })
+    //   let enterPromise=new Promise(res=>window.enterPromise=res)
+    //   let renderPromise=new Promise(res=>window.renderPromise=res)
+    //      /**
+    //        * 将播放bgm的事件发送出去
+    //        */
+    //   Promise.all([enterPromise,renderPromise])
+    //   .then(()=>{
+    //       const event = new MouseEvent('click', {
+    //           'view': window,
+    //           'bubbles': true,
+    //           'cancelable': true,
+    //       });
+    //       const target = document.getElementById('play_title_bgm_target');
+    //       if (target !== null) {
+    //           target.dispatchEvent(event);
+    //       }
+    //   })
       // 激活强制缩放
       // 在调整窗口大小时重新计算宽高，设计稿按照 1600*900。
       setTimeout(resizeTitle, 100);

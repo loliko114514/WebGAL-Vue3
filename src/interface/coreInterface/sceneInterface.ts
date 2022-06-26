@@ -1,3 +1,4 @@
+import { sceneEntry } from "./runtimeInterface";
 
 export enum commandType {
   say, //对话
@@ -58,6 +59,29 @@ export enum commandType {
   sentenceAssets: Array<IAsset>, // 语句携带的资源列表
   subScene: Array<string> // 语句包含子场景列表
 }
+
+/**
+ * 场景接口
+ * @interface IScene
+ */
+ export interface IScene {
+  sceneName: string; // 场景名称
+  sceneUrl: string; // 场景url
+  sentenceList: Array<ISentence>; // 语句列表
+  assetsList: Array<IAsset>; // 资源列表
+  subSceneList: Array<string>; // 子场景的url列表
+}
+
+/**
+ * 当前的场景数据
+ * @interface ISceneData
+ */
+ export interface ISceneData {
+  currentSentenceId: number; // 当前语句ID
+  sceneStack: Array<sceneEntry>; // 场景栈
+  currentScene: IScene; // 当前场景数据
+}
+
 
 /**
  * 内置资源类型的枚举

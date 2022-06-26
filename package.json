@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "pinia": "^2.0.13",
     "vue": "^3.2.25"
