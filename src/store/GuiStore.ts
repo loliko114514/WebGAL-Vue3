@@ -23,6 +23,12 @@ export const GuiStore = defineStore('GuiStore',{
       },
       setShowMenuPanel(showMenuPanel:boolean){
         this.guiState.showMenuPanel = showMenuPanel
+      },
+      settitleBg(url:string){
+        this.guiState.titleBg = url
+      },
+      settitleBgm(url:string){
+        this.guiState.titleBgm = url
       }
     }
 })

@@ -92,5 +92,6 @@ export enum fileType {
   figure,
   scene,
   tex,
-  vocal
+  vocal,
+  video
 }

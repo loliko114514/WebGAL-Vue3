@@ -4,10 +4,12 @@ import { GuiStore } from "./GuiStore"
 import { StageStore } from "./StageStore"
 import { IBacklogItem } from "../interface/coreInterface/runtimeInterface"
 import { ISaveData, IUserData } from "../interface/stateInterface/userDataInterface"
-import { ISceneData } from "../interface/coreInterface/sceneInterface"
-import { cloneDeep, isArguments } from "lodash"
+import { ISceneData, fileType } from "../interface/coreInterface/sceneInterface"
+import { assetSetter } from "../util/assetSetter"
+import { cloneDeep } from "lodash"
 import localforage from "localforage"
-export const ControllerSotre = defineStore('ControllerSotre',{
+import axios from "axios"
+export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
     const userDataState = UserDataStore().userDataState
     const stageState = StageStore().stageState
@@ -33,6 +35,40 @@ export const ControllerSotre = defineStore('ControllerSotre',{
     }
   },
   actions:{
+    infoFetcher(url:string){
+      const guiStore = GuiStore()
+      axios.get(url).then((r)=>{
+        let gameConfigRaw: Array<string> = r.data.split('\n'); // 游戏配置原始数据
+        gameConfigRaw = gameConfigRaw.map((e) => e.split(';')[0]);
+        const gameConfig: Array<Array<string>> = gameConfigRaw.map((e) => e.split(':')); // 游戏配置数据
+        console.log('获取到游戏信息', gameConfig);
+        // 按照游戏的配置开始设置对应的状态
+        if (guiStore.guiState) {
+          gameConfig.forEach((e) => {
+            // 设置标题背景
+            if (e[0] === 'Title_img') {
+              const url: string = assetSetter(e[1], fileType.background);
+              guiStore.settitleBg(url)
+            }
+            // 设置标题背景音乐
+            if (e[0] === 'Title_bgm') {
+              const url: string = assetSetter(e[1], fileType.bgm);
+              guiStore.settitleBgm(url)
+            }
+            if (e[0] === 'Game_name') {
+              gameInfo.gameName = e[1];
+              document.title = e[1];
+            }
+            if (e[0] === 'Game_key') {
+              gameInfo.gameKey = e[1];
+              getStorage();
+            }
+          });
+        }
+        window?.renderPromise?.();
+        delete window.renderPromise;
+      })
+    },
     saveGame(index:number){
       const userDataState = UserDataStore().userDataState
       const stageState = StageStore().stageState

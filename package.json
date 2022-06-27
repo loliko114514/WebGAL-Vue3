@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "pinia": "^2.0.13",
