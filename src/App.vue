@@ -8,10 +8,12 @@
 import Title from './components/Title.vue'
 import Menu from './components/Menu/Menu.vue'
 import { GuiStore } from './store/GuiStore'
+import { ControllerStore } from './store/ControllerStore'
 import { onMounted, ref } from 'vue'
 import { resize } from "./util/resize"
-const guiStore = GuiStore()
 
+const guiStore = GuiStore()
+const controllerStore = ControllerStore()
 const root = ref(HTMLElement.prototype)
 onMounted(()=>{
   const rootDom:HTMLElement = root.value
