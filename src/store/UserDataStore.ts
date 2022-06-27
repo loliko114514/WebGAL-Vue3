@@ -35,9 +35,6 @@ export const UserDataStore = defineStore('UserDataStore',{
       setTextSize(size:TextSize){
         this.userDataState.optionData.textSize = size
       },
-      setStorage(){//更新本地缓存
-
-      },
       setVolume(){//设置音量
 
       },
