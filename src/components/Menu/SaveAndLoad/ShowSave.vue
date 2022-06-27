@@ -1,7 +1,7 @@
 <template>
   <div
     v-for="i in list"
-    @click="controllerSotre.saveGame(1)"
+    @click="controllerStore.saveGame(1)"
     :key="'saveElement'+i"
     class="Save_Load_content_element"
     :style="{'animation-delay':i*30+'ms'}"
@@ -44,10 +44,10 @@
 <script setup lang='ts'>
 import { ref,reactive } from 'vue';
 import { UserDataStore } from '../../../store/UserDataStore';
-import { ControllerSotre } from '../../../store/ControllerStore';
+import { ControllerStore } from '../../../store/ControllerStore';
 import { computed } from '@vue/reactivity';
 
-const controllerSotre = ControllerSotre()
+const controllerStore = ControllerStore()
 const userdataStore = UserDataStore()
 let list = computed(()=>{
   const start = (userdataStore.userDataState.optionData.slPage-1)*10+1

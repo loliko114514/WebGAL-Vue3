@@ -12,22 +12,21 @@
   </div>
 </template>
 
-
 <script setup lang='ts'>
 
 import { ref,watch } from 'vue';
-import { ControllerSotre } from '../../../store/ControllerStore';
+import { ControllerStore } from '../../../store/ControllerStore';
 import { UserDataStore } from '../../../store/UserDataStore';
 import { computed } from '@vue/reactivity';
 
-const controllerSotre = ControllerSotre()
+const controllerStore = ControllerStore()
 const userdataStore = UserDataStore()
 // let textDelay = ref(webgal_env.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed)
 // let size = ref(50*userdataStore.userDataState.optionData.textSize+200+'%')
 const previewText = '现在预览的是文本框字体大小和播放速度的情况，您可以根据您的观感调整上面的选项。'
 let key = ref(0)
 let textDelay = computed(()=>{
-  return controllerSotre.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed
+  return controllerStore.textInitialDelay - 20*userdataStore.userDataState.optionData.textSpeed
 })
 watch(textDelay,()=>{
   key.value++

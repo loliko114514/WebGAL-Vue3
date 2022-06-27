@@ -4,11 +4,12 @@ import { GuiStore } from "./GuiStore"
 import { StageStore } from "./StageStore"
 import { IBacklogItem } from "../interface/coreInterface/runtimeInterface"
 import { ISaveData, IUserData } from "../interface/stateInterface/userDataInterface"
-import { ISceneData, fileType } from "../interface/coreInterface/sceneInterface"
+import { ISceneData, fileType, IScene, IAsset, ISentence } from "../interface/coreInterface/sceneInterface"
 import { assetSetter } from "../util/assetSetter"
 import { cloneDeep } from "lodash"
 import localforage from "localforage"
 import axios from "axios"
+import { sceneFetcher } from "../util/sceneFetcher"
 export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
     const userDataState = UserDataStore().userDataState
@@ -35,6 +36,21 @@ export const ControllerStore = defineStore('ControllerStore',{
     }
   },
   actions:{
+    /**
+     * 引擎初始化函数
+     */
+    initializeScript(){
+      // 获取游戏信息
+      this.infoFetcher('./game/config.txt')
+      // 获取start场景
+      const sceneUrl: string = assetSetter('start.txt', fileType.scene);
+      // 场景写入到运行时
+      sceneFetcher(sceneUrl).then((rawScene) => {
+        this.runtime_currentSceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
+      });
+
+    },
+
     infoFetcher(url:string){
       const guiStore = GuiStore()
       axios.get(url).then((r)=>{
@@ -56,17 +72,17 @@ export const ControllerStore = defineStore('ControllerStore',{
               guiStore.settitleBgm(url)
             }
             if (e[0] === 'Game_name') {
-              gameInfo.gameName = e[1];
+              this.gameInfo.gameName = e[1];
               document.title = e[1];
             }
             if (e[0] === 'Game_key') {
-              gameInfo.gameKey = e[1];
-              getStorage();
+              this.gameInfo.gameKey = e[1];
+              this.getStorage();
             }
           });
         }
-        window?.renderPromise?.();
-        delete window.renderPromise;
+        // window?.renderPromise?.();
+        // delete window.renderPromise;
       })
     },
     saveGame(index:number){

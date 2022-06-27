@@ -25,6 +25,9 @@ export enum commandType {
   setVar,//设置变量
   if,//条件跳转
   callScene,//调用场景
+  showVars,
+  unlockCg,
+  unlockBgm
 }
 
 /**
@@ -82,6 +85,14 @@ export enum commandType {
   currentScene: IScene; // 当前场景数据
 }
 
+/**
+ * 处理后的命令接口
+ * @interface parsedCommand
+ */
+ export interface parsedCommand {
+  type: commandType;
+  additionalArgs: Array<arg>;
+}
 
 /**
  * 内置资源类型的枚举
