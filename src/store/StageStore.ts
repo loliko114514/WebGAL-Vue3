@@ -24,7 +24,7 @@ export const StageStore = defineStore('StageStore',{
     }
   },
   actions:{
-    resetUserData(stageState:IStageState){
+    resetStageState(stageState:IStageState){
       Object.assign(this.stageState,stageState)
     },
   }
