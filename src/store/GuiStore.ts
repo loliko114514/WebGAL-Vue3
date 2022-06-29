@@ -11,8 +11,8 @@ export const GuiStore = defineStore('GuiStore',{
           showMenuPanel: false,
           showTextBox: true,
           currentMenuTag: MenuPanelTag.Option,
-          titleBg: '',
-          titleBgm: '',
+          titleBg: 'Title',
+          titleBgm: 'Title',
           showExtra: false,
         }
       }
@@ -32,6 +32,9 @@ export const GuiStore = defineStore('GuiStore',{
       },
       settitleBgm(url:string){
         this.guiState.titleBgm = url
+      },
+      setShowTextBox(showTextBox:boolean){
+        this.guiState.showTextBox = showTextBox 
       }
-    }
+    }  
 })

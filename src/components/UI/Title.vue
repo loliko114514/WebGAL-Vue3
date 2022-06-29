@@ -27,11 +27,17 @@
   
 <script setup lang='ts'>
 import { GuiStore } from '../../store/GuiStore'
+import { ControllerStore } from '../../store/ControllerStore';
 import { ref } from 'vue';
 const guiStore = GuiStore()
+const controllerStore = ControllerStore()
 let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.guiState.titleBg}.png)`)
   const hideTitle = ():void=>{
-    console.log("开始游戏")
+    guiStore.guiState.showTitle = false
+    if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
+    controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
+      controllerStore.nextSentence()
+    }
   }
   const continueGame = ():void=>{
     console.log("继续游戏")

@@ -34,8 +34,8 @@
 
 <script setup lang='ts'>
 import { ref } from 'vue'
-import { GuiStore } from '../../../store/GuiStore'
-import { MenuPanelTag } from '../../../interface/stateInterface/guiInterface'
+import { GuiStore } from '../../../../store/GuiStore'
+import { MenuPanelTag } from '../../../../interface/stateInterface/guiInterface'
 import MenuPanelButton from './MenuPanelButton.vue';
 import { computed,reactive } from 'vue';
   const guiStore = GuiStore()
