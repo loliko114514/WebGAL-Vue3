@@ -12,7 +12,7 @@
       class="Save_Load_content"
       :id="'Save_content_page_' + userdataStore.userDataState.optionData.slPage"
     >
-      <ShowSave v-if="userdataStore.userDataState.saveData.length!==0"/>
+      <ShowSave/>
     </div>
   </div>
 </template>
@@ -23,7 +23,6 @@ import Page from './Page.vue';
 import { UserDataStore } from '../../../store/UserDataStore';
 
 const userdataStore = UserDataStore()
-
 </script>
 
 <style lang="scss" scoped>

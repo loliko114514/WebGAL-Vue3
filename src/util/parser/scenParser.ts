@@ -1,9 +1,8 @@
 import { IAsset, IScene, ISentence } from '../../interface/coreInterface/sceneInterface';
 import { scriptParser } from './scriptParser/scriptParser';
-import { assetsPrefetcher } from '../util/prefetcher/assetsPrefetcher';
-import { scenePrefetcher } from '../util/prefetcher/scenePrefetcher';
-import { logger } from '../util/etc/logger';
-import { settledScene } from '../runtime/etc';
+import { assetsPrefetcher } from '../prefetcher/assetsPrefetcher';
+import { scenePrefetcher } from '../prefetcher/scenePrefetcher'; 
+import { ControllerStore } from '../../store/ControllerStore'; 
 import  uniqWith  from 'lodash/uniqWith';
 
 /**
@@ -14,6 +13,7 @@ import  uniqWith  from 'lodash/uniqWith';
  * @return {IScene} 解析后的场景
  */
 export const sceneParser = (rawScene: string, sceneName: string, sceneUrl: string): IScene => {
+  const settledScene = ControllerStore().settledScene
   const rawSentenceList = rawScene.split('\n'); // 原始句子列表
   // 去除空行
   const rawSentenceListWithoutEmpty = rawSentenceList.filter(sentence => sentence.trim() !== '');
@@ -41,6 +41,6 @@ export const sceneParser = (rawScene: string, sceneName: string, sceneUrl: strin
     assetsList: assetsList, // 资源列表
     subSceneList: subSceneList, // 子场景列表
   };
-  logger.info(`解析场景：${sceneName}，数据为：`, parsedScene);
+  console.log(`解析场景：${sceneName}，数据为：`, parsedScene);
   return parsedScene;
 };

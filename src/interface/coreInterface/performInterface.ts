@@ -13,6 +13,8 @@ import {ISentence} from "./sceneInterface"
   blockingNext: Function // 演出是否阻塞游戏流程继续（一个函数，返回 boolean类型的结果，判断要不要阻塞）
   blockingAuto: Function // 演出是否阻塞自动模式（一个函数，返回 boolean类型的结果，判断要不要阻塞）
   stopTimeout: any
+  // 演出结束后转到下一句
+  goNextWhenOver?: boolean;
 }
 
 /**

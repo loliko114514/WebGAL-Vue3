@@ -2,7 +2,7 @@ import { defineStore } from "pinia"
 import { UserDataStore } from "./UserDataStore"
 import { GuiStore } from "./GuiStore"
 import { StageStore } from "./StageStore"
-import { IBacklogItem } from "../interface/coreInterface/runtimeInterface"
+import { IBacklogItem, IGamePlay } from "../interface/coreInterface/runtimeInterface"
 import { ISaveData, IUserData } from "../interface/stateInterface/userDataInterface"
 import { ISceneData, fileType, IScene, IAsset, ISentence } from "../interface/coreInterface/sceneInterface"
 import { assetSetter } from "../util/assetSetter"
@@ -10,6 +10,8 @@ import { cloneDeep } from "lodash"
 import localforage from "localforage"
 import axios from "axios"
 import { sceneFetcher } from "../util/sceneFetcher"
+import { sceneParser } from "../util/parser/scenParser"
+import { IRunPerform } from "../interface/coreInterface/performInterface"
 export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
     const userDataState = UserDataStore().userDataState
@@ -32,6 +34,18 @@ export const ControllerStore = defineStore('ControllerStore',{
       gameInfo:{
         gameName: '',
         gameKey: '',
+      },
+      settledScene: <Array<string>> [],
+      settledAssets: <Array<string>> [],
+      runtime_gamePlay: <IGamePlay>{
+        performList: [],
+        timeoutList: [],
+        isAuto: false,
+        isFast: false,
+        autoInterval: null,
+        fastInterval: null,
+        autoTimeout: null,
+        currentPixi: null
       }
     }
   },
@@ -43,14 +57,73 @@ export const ControllerStore = defineStore('ControllerStore',{
       // 获取游戏信息
       this.infoFetcher('./game/config.txt')
       // 获取start场景
-      const sceneUrl: string = assetSetter('start.txt', fileType.scene);
+      const sceneUrl: string = assetSetter('start.txt', fileType.scene)
       // 场景写入到运行时
       sceneFetcher(sceneUrl).then((rawScene) => {
-        this.runtime_currentSceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl);
-      });
-
+        this.runtime_currentSceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl)
+      })
     },
+    nextSentence(){
+      // 如果当前显示标题，那么不进行下一句
+      const GuiState = GuiStore().guiState
+      if (GuiState.showTitle) {
+        return
+      }
 
+      // 第一步，检查是否存在 blockNext 的演出
+      let isBlockingNext = false;
+      this.runtime_gamePlay.performList.forEach((e) => {
+        if (e.blockingNext() && !e.isOver)
+          // 阻塞且没有结束的演出
+          isBlockingNext = true
+      });
+      if (isBlockingNext) {
+        // 有阻塞，提前结束
+        console.log('next 被阻塞！')
+        return
+      }
+
+      // 检查是否处于演出完成状态，不是则结束所有普通演出（保持演出不算做普通演出）
+      let allSettled = true;
+      this.runtime_gamePlay.performList.forEach((e) => {
+        if (!e.isHoldOn) allSettled = false;
+      });
+      if (allSettled) {
+        // 所有普通演出已经结束
+        // 清除状态表的演出序列（因为这时候已经准备进行下一句了）
+        const stageStore = StageStore()
+        const newStageState = cloneDeep(stageStore.stageState);
+        for (let i = 0; i < newStageState.PerformList.length; i++) {
+          const e: IRunPerform = newStageState.PerformList[i];
+          if (!e.isHoldOn) {
+            newStageState.PerformList.splice(i, 1);
+            i--;
+          }
+        }
+        stageStore.resetStageState(newStageState)
+        // scriptExecutor();
+        return;
+      }
+
+      // 不处于 allSettled 状态，清除所有普通演出，强制进入settled。
+      console.log('提前结束被触发，现在清除普通演出');
+      let isGoNext = false;
+      for (let i = 0; i < this.runtime_gamePlay.performList.length; i++) {
+        const e = this.runtime_gamePlay.performList[i];
+        if (!e.isHoldOn) {
+          if (e.goNextWhenOver) {
+            isGoNext = true;
+          }
+          e.stopFunction();
+          clearTimeout(e.stopTimeout);
+          this.runtime_gamePlay.performList.splice(i, 1);
+          i--;
+        }
+      }
+      if (isGoNext) {
+        this.nextSentence();
+      }
+    },
     infoFetcher(url:string){
       const guiStore = GuiStore()
       axios.get(url).then((r)=>{

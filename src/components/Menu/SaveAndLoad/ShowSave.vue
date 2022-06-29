@@ -6,11 +6,11 @@
     class="Save_Load_content_element"
     :style="{'animation-delay':i*30+'ms'}"
     >
-    <div class="Save_Load_content_element_top">
+    <div v-if="saveData[i]" class="Save_Load_content_element_top">
       <div class="Save_Load_content_element_top_index">{{saveData[i].index}}</div>
       <div class="Save_Load_content_element_top_date">{{saveData[i].saveTime}}</div>
     </div>
-    <div class="Save_Load_content_miniRen">
+    <div v-if="saveData[i]" class="Save_Load_content_miniRen">
       <img v-if="saveData[i].nowStageState.bgName!==''"
         class="Save_Load_content_miniRen_bg"
         alt="Save_img_preview"
@@ -34,7 +34,7 @@
             :src="saveData[i].nowStageState.figName" />
       </div>
     </div>
-    <div class="styles.Save_Load_content_text">
+    <div v-if="saveData[i]" class="styles.Save_Load_content_text">
       <div class="styles.Save_Load_content_speaker">{{saveData[i].nowStageState.showName}}</div>
       <div class="styles.Save_Load_content_text_padding">{{saveData[i].nowStageState.showText}}</div>
     </div>
@@ -51,10 +51,11 @@ const controllerStore = ControllerStore()
 const userdataStore = UserDataStore()
 let list = computed(()=>{
   const start = (userdataStore.userDataState.optionData.slPage-1)*10+1
-  let list = new Array(10)
+  let list = new Array()
   for(let i=start;i<start+10;i++){
   list.push(i)
   }
+  console.log('list',list)
   return list
 })
 
