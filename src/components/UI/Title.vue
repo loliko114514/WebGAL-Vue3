@@ -26,7 +26,7 @@
 </template>                
   
 <script setup lang='ts'>
-import { GuiStore } from '../store/GuiStore'
+import { GuiStore } from '../../store/GuiStore'
 import { ref } from 'vue';
 const guiStore = GuiStore()
 let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.guiState.titleBg}.png)`)

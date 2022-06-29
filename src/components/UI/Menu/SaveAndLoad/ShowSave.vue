@@ -43,8 +43,8 @@
 
 <script setup lang='ts'>
 import { ref,reactive } from 'vue';
-import { UserDataStore } from '../../../store/UserDataStore';
-import { ControllerStore } from '../../../store/ControllerStore';
+import { UserDataStore } from '../../../../store/UserDataStore';
+import { ControllerStore } from '../../../../store/ControllerStore';
 import { computed } from '@vue/reactivity';
 
 const controllerStore = ControllerStore()

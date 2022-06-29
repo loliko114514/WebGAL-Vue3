@@ -15,8 +15,8 @@ import { ref } from 'vue';
 import MenuPanel from './MenuPanel/MenuPanel.vue';
 import Save from './SaveAndLoad/Save.vue';
 import Options from './Options/Options.vue';
-import { GuiStore } from "../../store/GuiStore";
-import { MenuPanelTag }from "../../interface/stateInterface/guiInterface"
+import { GuiStore } from "../../../store/GuiStore";
+import { MenuPanelTag }from "../../../interface/stateInterface/guiInterface"
 import { computed } from '@vue/reactivity';
 
 const guiStore = GuiStore()

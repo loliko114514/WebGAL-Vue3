@@ -13,11 +13,11 @@
           :textList="['慢', '中', '快']" 
           :functionList="[
             ()=>{userdataStore.setTextSpeed(PlaySpeed.slow)
-              userdataStore.setStorage()},
+              controllerStore.setStorage()},
             ()=>{userdataStore.setTextSpeed(PlaySpeed.normal)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
             ()=>{userdataStore.setTextSpeed(PlaySpeed.fast)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
           ]"
           :currentChecked="userdataStore.userDataState.optionData.textSpeed"></NormalButton>
         </NormalOption>
@@ -26,11 +26,11 @@
           :textList="['慢', '中', '快']" 
           :functionList="[
             ()=>{userdataStore.setAutoSpeed(PlaySpeed.slow)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
             ()=>{userdataStore.setAutoSpeed(PlaySpeed.normal)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
             ()=>{userdataStore.setAutoSpeed(PlaySpeed.fast)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
           ]"
           :currentChecked="userdataStore.userDataState.optionData.autoSpeed"></NormalButton>
         </NormalOption>
@@ -39,11 +39,11 @@
           :textList="['小', '中', '大']" 
           :functionList="[
             ()=>{userdataStore.setTextSize(TextSize.small)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
             ()=>{userdataStore.setTextSize(TextSize.medium)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
             ()=>{userdataStore.setTextSize(TextSize.large)
-            userdataStore.setStorage()},
+            controllerStore.setStorage()},
           ]"
           :currentChecked="userdataStore.userDataState.optionData.textSize"></NormalButton>
         </NormalOption>
@@ -57,7 +57,7 @@
           <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
             uniqueID="主音量" :onChange="(event:any) => {
               userdataStore.userDataState.optionData.volumeMain = parseInt(event.target.value)
-              userdataStore.setStorage();
+              controllerStore.setStorage();
               userdataStore.setVolume();
             }"
           />
@@ -66,7 +66,7 @@
           <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
             uniqueID="语音音量" :onChange="(event:any) => {
               userdataStore.userDataState.optionData.vocalVolume = parseInt(event.target.value)
-              userdataStore.setStorage();
+              controllerStore.setStorage();
               userdataStore.setVolume();
             }"
           />
@@ -75,7 +75,7 @@
           <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
             uniqueID="背景音乐音量" :onChange="(event:any) => {
               userdataStore.userDataState.optionData.bgmVolume = parseInt(event.target.value)
-              userdataStore.setStorage();
+              controllerStore.setStorage();
               userdataStore.setVolume();
             }"
           />
@@ -90,12 +90,13 @@ import NormalOption from './NormalOption.vue';
 import NormalButton from './NormalButton.vue';
 import OptionSlider from './OptionSlider.vue';
 import TextPreview from './TextPreview.vue';
-import { PlaySpeed,TextSize } from '../../../interface/stateInterface/userDataInterface'
-import { UserDataStore } from '../../../store/UserDataStore'
+import { PlaySpeed,TextSize } from '../../../../interface/stateInterface/userDataInterface'
+import { UserDataStore } from '../../../../store/UserDataStore'
+import { ControllerStore } from '../../../../store/ControllerStore';
 import { ref } from 'vue';
 
 const userdataStore = UserDataStore()
-
+const controllerStore = ControllerStore()
 </script>
 
 <style lang="scss" scoped>

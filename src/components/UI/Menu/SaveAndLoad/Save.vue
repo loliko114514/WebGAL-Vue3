@@ -20,7 +20,7 @@
 <script setup lang='ts'>
 import ShowSave from './ShowSave.vue';
 import Page from './Page.vue';
-import { UserDataStore } from '../../../store/UserDataStore';
+import { UserDataStore } from '../../../../store/UserDataStore';
 
 const userdataStore = UserDataStore()
 </script>

@@ -5,8 +5,8 @@
 </div>
 </template>
 <script setup lang="ts">
-import Title from './components/Title.vue'
-import Menu from './components/Menu/Menu.vue'
+import Title from './components/UI/Title.vue'
+import Menu from './components/UI/Menu/Menu.vue'
 import { GuiStore } from './store/GuiStore'
 import { ControllerStore } from './store/ControllerStore'
 import { onMounted, ref } from 'vue'
