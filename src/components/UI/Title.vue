@@ -36,7 +36,7 @@ let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.guiState.tit
     guiStore.guiState.showTitle = false
     if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
     controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
-      controllerStore.nextSentence()
+      controllerStore.nextSentence() 
     }
   }
   const continueGame = ():void=>{

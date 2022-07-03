@@ -1,11 +1,96 @@
 <template>
-
+<div class="FullScreenPerform_main" :style="{'width': stageWidth, 'height': stageHeight, 'top': top}">
+  <div id="videoContainer"/>
+  <div class="introContainer" id="introContainer"/>
+  <div id="pixiContianer"/>
+  <div id="chooseContainer"/>
+</div>;
 </template>
 
 <script setup lang='ts'>
+import { StageStore } from '../../store/StageStore';
+import { computed } from '@vue/reactivity';
+import { ref } from 'vue';
 
+const stageState = StageStore().stageState
+let stageWidth = ref('100%')
+let stageHeight = computed(()=>{
+  if(stageState.enableFilm !== ''){
+    return '76%'
+  }
+  else{
+    return '100%'
+  }
+})
+let top = computed(()=>{
+  if(stageState.enableFilm !== ''){
+    return '12%'
+  }
+  else{
+    return '0%'
+  }
+})
 </script>
 
 <style lang="scss" scoped>
+.FullScreenPerform_main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.FullScreenPerform_element {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+}
+
+.fullScreen_video {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+}
+
+.introContainer {
+  box-sizing: border-box;
+  padding: 3em 4em 3em 4em;
+  font-size: 350%;
+  position: absolute;
+  z-index: 11;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 1);
+  color: white;
+  display: none;
+}
+
+.introElement {
+  opacity: 0;
+  animation: intro_showSoftly 1.5s ease-out forwards;
+  font-family: "思源宋体", serif;
+}
+
+@keyframes intro_showSoftly {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.videoContainer {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 11;
+  background: rgba(0, 0, 0, 1);
+}
 
 </style>

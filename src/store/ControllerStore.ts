@@ -14,8 +14,6 @@ import { sceneParser } from "../util/parser/scenParser"
 import { IRunPerform } from "../interface/coreInterface/performInterface"
 export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
-    const userDataState = UserDataStore().userDataState
-    const stageState = StageStore().stageState
     return{
       textInitialDelay:<number> 80,
       runtime_currentBacklog:<Array<IBacklogItem>>[],

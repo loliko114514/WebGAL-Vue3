@@ -20,6 +20,7 @@
         guiStore.setShowTextBox(true)
         return
       }
+      // stopAll()
       controllerStore.nextSentence()
     }"
     id="FullScreenClick"
