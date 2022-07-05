@@ -23,6 +23,7 @@ onMounted(()=>{
   window.onresize = ()=>{
     resize(rootDom)
   }
+  controllerStore.initializeScript()
 })
 
 </script>

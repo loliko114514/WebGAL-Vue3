@@ -14,22 +14,22 @@ import { fileType } from "../interface/coreInterface/sceneInterface";
     let returnFilePath: string;
     switch (assetType) {
     case fileType.background:
-      returnFilePath = `./game/background/${fileName}`;
+      returnFilePath = `../../public/game/background/${fileName}`;
       break;
     case fileType.scene:
-      returnFilePath = `./game/scene/${fileName}`;
+      returnFilePath = `../../public/game/scene/${fileName}`;
       break;
     case fileType.vocal:
-      returnFilePath = `./game/vocal/${fileName}`;
+      returnFilePath = `../../public/game/vocal/${fileName}`;
       break;
     case fileType.figure:
-      returnFilePath = `./game/figure/${fileName}`;
+      returnFilePath = `../../public/game/figure/${fileName}`;
       break;
     case fileType.bgm:
-      returnFilePath = `./game/bgm/${fileName}`;
+      returnFilePath = `../../public/game/bgm/${fileName}`;
       break;
     case fileType.video:
-      returnFilePath = `./game/video/${fileName}`;
+      returnFilePath = `../../public/game/video/${fileName}`;
       break;
     default:
       returnFilePath = ``;

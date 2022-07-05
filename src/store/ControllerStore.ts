@@ -53,7 +53,7 @@ export const ControllerStore = defineStore('ControllerStore',{
      */
     initializeScript(){
       // 获取游戏信息
-      this.infoFetcher('./game/config.txt')
+      this.infoFetcher('../../public/game/config.txt')
       // 获取start场景
       const sceneUrl: string = assetSetter('start.txt', fileType.scene)
       // 场景写入到运行时

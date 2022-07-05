@@ -31,7 +31,7 @@ import { ControllerStore } from '../../store/ControllerStore';
 import { ref } from 'vue';
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
-let titleBg = ref(`url(src/assets/game/background/${guiStore.$state.guiState.titleBg}.png)`)
+let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg}.png)`)
   const hideTitle = ():void=>{
     guiStore.guiState.showTitle = false
     if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
