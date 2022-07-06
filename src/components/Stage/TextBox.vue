@@ -1,5 +1,5 @@
 <template>
-<div id="textBoxMain" class="styles.TextBox_main">
+<div id="textBoxMain" class="TextBox_main">
   <div id="miniAvatar" class="miniAvatarContainer">
       <img v-if="stageState.miniAvatar !== ''" className={styles.miniAvatarImg} alt="miniAvatar" src={stageState.miniAvatar}/>
   </div>

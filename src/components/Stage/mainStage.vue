@@ -7,7 +7,7 @@
         :style="{'background-image':`url(${stageState.oldBgName})`,'background-size':'cover'}"/>
       <div :key="'bgMain' + stageState.bgName"
         id="MainStage_bg_MainContainer"
-        class="styles.MainStage_bgContainer" 
+        class="MainStage_bgContainer" 
         :style="{'background-image':`url(${stageState.bgName})`,'background-size':'cover'}"/>
       <FigureContainer/>  
     </div>

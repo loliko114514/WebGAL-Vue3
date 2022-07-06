@@ -51,7 +51,7 @@ export const ControllerStore = defineStore('ControllerStore',{
     /**
      * 引擎初始化函数
      */
-    initializeScript(){
+    async initializeScript(){
       // 获取游戏信息
       this.infoFetcher('../../public/game/config.txt')
       // 获取start场景
