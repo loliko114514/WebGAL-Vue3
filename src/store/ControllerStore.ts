@@ -14,6 +14,7 @@ import { sceneParser } from "../util/parser/scenParser"
 import { initPerform, IPerform, IRunPerform } from "../interface/coreInterface/performInterface"
 import { infoFetcher } from "../util/coreInitialFunction/infoFetcher"
 import { IStageState } from "../interface/stateInterface/stageInterface"
+import { runScript } from "../controller/gamePlay/runScript"
 export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
     return{
@@ -181,7 +182,7 @@ export const ControllerStore = defineStore('ControllerStore',{
         this.nextSentence();
         return;
       }
-      this.runScript(currentScript);
+      runScript(currentScript);
       let isNext = false; // 是否要进行下一句
       currentScript.args.forEach((e) => {
         // 判断是否有下一句的参数
