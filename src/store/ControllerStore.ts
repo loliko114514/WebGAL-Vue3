@@ -2,16 +2,18 @@ import { defineStore } from "pinia"
 import { UserDataStore } from "./UserDataStore"
 import { GuiStore } from "./GuiStore"
 import { StageStore } from "./StageStore"
-import { IBacklogItem, IGamePlay } from "../interface/coreInterface/runtimeInterface"
+import { IBacklogItem, IGamePlay, sceneEntry } from "../interface/coreInterface/runtimeInterface"
 import { ISaveData, IUserData } from "../interface/stateInterface/userDataInterface"
-import { ISceneData, fileType, IScene, IAsset, ISentence } from "../interface/coreInterface/sceneInterface"
+import { ISceneData, fileType, IScene, IAsset, ISentence, commandType } from "../interface/coreInterface/sceneInterface"
 import { assetSetter } from "../util/assetSetter"
 import { cloneDeep } from "lodash"
 import localforage from "localforage"
 import axios from "axios"
 import { sceneFetcher } from "../util/sceneFetcher"
 import { sceneParser } from "../util/parser/scenParser"
-import { IRunPerform } from "../interface/coreInterface/performInterface"
+import { initPerform, IPerform, IRunPerform } from "../interface/coreInterface/performInterface"
+import { infoFetcher } from "../util/coreInitialFunction/infoFetcher"
+import { IStageState } from "../interface/stateInterface/stageInterface"
 export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
     return{
@@ -53,7 +55,7 @@ export const ControllerStore = defineStore('ControllerStore',{
      */
     async initializeScript(){
       // 获取游戏信息
-      this.infoFetcher('../../public/game/config.txt')
+      infoFetcher('../../public/game/config.txt')
       // 获取start场景
       const sceneUrl: string = assetSetter('start.txt', fileType.scene)
       // 场景写入到运行时
@@ -61,7 +63,16 @@ export const ControllerStore = defineStore('ControllerStore',{
         this.runtime_currentSceneData.currentScene = sceneParser(rawScene, 'start.txt', sceneUrl)
       })
     },
-    nextSentence(){
+
+    /**
+     * -----------------------------------------gamePlay---------------------------------------
+     */
+
+    /**
+     * 进行下一句
+     */
+     nextSentence(){
+      console.log("进行下一句")
       // 如果当前显示标题，那么不进行下一句
       const GuiState = GuiStore().guiState
       if (GuiState.showTitle) {
@@ -86,7 +97,7 @@ export const ControllerStore = defineStore('ControllerStore',{
       this.runtime_gamePlay.performList.forEach((e) => {
         if (!e.isHoldOn) allSettled = false;
       });
-      if (allSettled) {
+      if (allSettled) { 
         // 所有普通演出已经结束
         // 清除状态表的演出序列（因为这时候已经准备进行下一句了）
         const stageStore = StageStore()
@@ -99,10 +110,10 @@ export const ControllerStore = defineStore('ControllerStore',{
           }
         }
         stageStore.resetStageState(newStageState)
-        // scriptExecutor();
+        this.scriptExecutor()
         return;
       }
-
+        
       // 不处于 allSettled 状态，清除所有普通演出，强制进入settled。
       console.log('提前结束被触发，现在清除普通演出');
       let isGoNext = false;
@@ -122,40 +133,144 @@ export const ControllerStore = defineStore('ControllerStore',{
         this.nextSentence();
       }
     },
-    infoFetcher(url:string){
-      const guiStore = GuiStore()
-      axios.get(url).then((r)=>{
-        let gameConfigRaw: Array<string> = r.data.split('\n'); // 游戏配置原始数据
-        gameConfigRaw = gameConfigRaw.map((e) => e.split(';')[0]);
-        const gameConfig: Array<Array<string>> = gameConfigRaw.map((e) => e.split(':')); // 游戏配置数据
-        console.log('获取到游戏信息', gameConfig);
-        // 按照游戏的配置开始设置对应的状态
-        if (guiStore.guiState) {
-          gameConfig.forEach((e) => {
-            // 设置标题背景
-            if (e[0] === 'Title_img') {
-              const url: string = assetSetter(e[1], fileType.background);
-              guiStore.settitleBg(url)
-            }
-            // 设置标题背景音乐
-            if (e[0] === 'Title_bgm') {
-              const url: string = assetSetter(e[1], fileType.bgm);
-              guiStore.settitleBgm(url)
-            }
-            if (e[0] === 'Game_name') {
-              this.gameInfo.gameName = e[1];
-              document.title = e[1];
-            }
-            if (e[0] === 'Game_key') {
-              this.gameInfo.gameKey = e[1];
-              this.getStorage();
-            }
-          });
+
+    /**
+     * 语句执行器
+     * 执行语句，同步场景状态，并根据情况立即执行下一句或者加入backlog
+     */
+    scriptExecutor(){
+      // 超过总语句数量，则从场景栈拿出一个需要继续的场景，然后继续流程。若场景栈清空，则停止流程
+      if (this.runtime_currentSceneData.currentSentenceId > this.runtime_currentSceneData.currentScene.sentenceList.length - 1) {
+        if (this.runtime_currentSceneData.sceneStack.length !== 0) {
+          const sceneToRestore: sceneEntry | undefined = this.runtime_currentSceneData.sceneStack.pop();
+          if (sceneToRestore !== undefined) {
+            this.restoreScene(sceneToRestore);
+          }
         }
-        // window?.renderPromise?.();
-        // delete window.renderPromise;
-      })
+        return;
+      }
+      const currentScript: ISentence =
+      this.runtime_currentSceneData.currentScene.sentenceList[this.runtime_currentSceneData.currentSentenceId];
+      // 判断这个脚本要不要执行
+      let runThis = true;
+      let isHasWhenArg = false;
+      let whenValue = '';
+      currentScript.args.forEach(e => {
+        if (e.key === 'when') {
+          isHasWhenArg = true;
+          whenValue = e.value.toString();
+        }
+      });
+      // 如果语句有 when
+      // if (isHasWhenArg) {
+      //   // 先把变量解析出来
+      //   const valExpArr = whenValue.split(/([+\-*\/()><=!]|>=|<=)/g);
+      //   const valExp = valExpArr.map(e => {
+      //     if (e.match(/[a-zA-Z]/)) {
+      //       if (e.match(/true/) || e.match(/false/)) {
+      //         return e;
+      //       }
+      //       return getValueFromState(e).toString();
+      //     } else return e;
+      //   }).reduce((pre, curr) => pre + curr, '');
+      //   runThis = strIf(valExp);
+      // }
+      // 执行语句
+      if (!runThis) {
+        this.runtime_currentSceneData.currentSentenceId++;
+        this.nextSentence();
+        return;
+      }
+      this.runScript(currentScript);
+      let isNext = false; // 是否要进行下一句
+      currentScript.args.forEach((e) => {
+        // 判断是否有下一句的参数
+        if (e.key === 'next' && e.value) {
+          isNext = true;
+        }
+      });
+
+      let isSaveBacklog = currentScript.command === commandType.say; // 是否在本句保存backlog（一般遇到对话保存）
+      // 检查当前对话是否有 notend 参数
+      currentScript.args.forEach(e => {
+        if (e.key === 'notend' && e.value === true) {
+          isSaveBacklog = false;
+        }
+      });
+      let currentStageState: IStageState;
+
+      // 执行至指定 sentenceID
+      // if (runToSentence >= 0 && runtime_currentSceneData.currentSentenceId < runToSentence) {
+      //   runtime_currentSceneData.currentSentenceId++;
+      //   scriptExecutor(runToSentence);
+      //   return;
+      // }
+
+      // 执行“下一句”
+      if (isNext) {
+        this.runtime_currentSceneData.currentSentenceId++;
+        this.scriptExecutor();
+        return;
+      }
+
+      /**
+       * 为了让 backlog 拿到连续执行了多条语句后正确的数据，放到下一个宏任务中执行（我也不知道为什么这样能正常，有能力的可以研究一下
+       */
+      setTimeout(() => {
+        // 同步当前舞台数据
+        currentStageState = StageStore().stageState
+        console.log('本条语句执行结果', currentStageState);
+        // 保存 backlog
+        if (isSaveBacklog) {
+          const newStageState = cloneDeep(currentStageState);
+          newStageState.PerformList.forEach(ele => {
+            ele.script.args.forEach(argelement => {
+              if (argelement.key === 'concat') {
+                argelement.value = false;
+                ele.script.content = newStageState.showText;
+              }
+            });
+          });
+          const backlogElement: IBacklogItem = {
+            currentStageState: newStageState,
+            saveScene: {
+              currentSentenceId: this.runtime_currentSceneData.currentSentenceId,// 当前语句ID
+              sceneStack: cloneDeep(this.runtime_currentSceneData.sceneStack), // 场景栈
+              sceneName: this.runtime_currentSceneData.currentScene.sceneName, // 场景名称
+              sceneUrl: this.runtime_currentSceneData.currentScene.sceneUrl, // 场景url
+            }
+          };
+          this.runtime_currentBacklog.push(backlogElement);
+        }
+      }, 0);
+      this.runtime_currentSceneData.currentSentenceId++;
     },
+    
+    /**
+     * -----------------------------------------scene---------------------------------------
+     */
+    
+    /**
+     * 恢复场景
+     * @param entry 场景入口
+     */
+    restoreScene(entry: sceneEntry){
+    // 场景写入到运行时
+    sceneFetcher(entry.sceneUrl).then((rawScene) => {
+      this.runtime_currentSceneData.currentScene = sceneParser(rawScene, entry.sceneName, entry.sceneUrl);
+      this.runtime_currentSceneData.currentSentenceId = entry.continueLine + 1; // 重设场景
+      this.nextSentence();
+    });
+    },
+
+    /**
+     * -----------------------------------------storage---------------------------------------
+     */
+
+    /**
+     * 保存游戏
+     * @param index 游戏的档位
+     */
     saveGame(index:number){
       const userDataState = UserDataStore().userDataState
       const stageState = StageStore().stageState
@@ -178,6 +293,10 @@ export const ControllerStore = defineStore('ControllerStore',{
       newSaveData[index] = saveData
       userDataState.saveData = cloneDeep(newSaveData)
     },
+
+    /**
+     * 写入本地存储
+     */
     setStorage(){
       this.debounce(()=>{
         const userDataState = UserDataStore().userDataState
@@ -186,6 +305,10 @@ export const ControllerStore = defineStore('ControllerStore',{
         });  
       },100)
     },
+
+    /**
+     * 从本地存储获取数据
+     */
     getStorage(){
       this.debounce(()=>{
         const userDataStore = UserDataStore()
@@ -200,6 +323,10 @@ export const ControllerStore = defineStore('ControllerStore',{
         });  
       },100)
     },
+    
+    /**
+     * 同步本地存储
+     */
     syncStorageFast(){
       const userDataStore = UserDataStore()
       localforage.setItem(this.gameInfo.gameKey,userDataStore.userDataState).then(()=>{
@@ -213,6 +340,11 @@ export const ControllerStore = defineStore('ControllerStore',{
         })
       })
     },
+
+    /**
+     * 检查用户数据属性是否齐全
+     * @param userData 需要检查的数据
+     */
     checkUserDataProperty(userData: any) {
       const userDatakey = UserDataStore().userDataState
       let result = true;
@@ -223,6 +355,12 @@ export const ControllerStore = defineStore('ControllerStore',{
       }
       return result;
     },
+
+    /**
+     * 防抖函数
+     * @param func 要执行的函数
+     * @param wait 防抖等待时间
+     */
     debounce<T, K>(func: (...args: T[]) => K, wait: number) {
       let timeout: ReturnType<typeof setTimeout>;
     

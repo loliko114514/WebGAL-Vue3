@@ -25,3 +25,18 @@ import {ISentence} from "./sceneInterface"
   isHoldOn: boolean, //演出类型
   script: ISentence, //演出脚本
 }
+
+/**
+ * 初始化的演出
+ */
+ export const initPerform: IPerform = {
+  performName: '',
+  duration: 100,
+  isOver: false,
+  isHoldOn: false,
+  stopFunction: () => {
+  },
+  blockingNext: () => false,
+  blockingAuto: () => true,
+  stopTimeout: undefined,
+};

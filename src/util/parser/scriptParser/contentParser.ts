@@ -38,6 +38,7 @@ export const contentParser = (contentRaw: string, type: commandType) => {
 };
 
 function getChooseContent(contentRaw: string): string {
+  contentRaw = contentRaw.replace('{','').replace('}','')
   const chooseList = contentRaw.split('|');
   const chooseKeyList = [];
   const chooseValueList = [];
