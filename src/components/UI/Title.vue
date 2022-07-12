@@ -28,7 +28,9 @@
 <script setup lang='ts'>
 import { GuiStore } from '../../store/GuiStore'
 import { ControllerStore } from '../../store/ControllerStore';
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
+import { testChange } from '../../controller/gamePlay/fastSkip'
+import { UserDataStore } from '../../store/UserDataStore';
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
 let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg}.png)`)
@@ -41,7 +43,14 @@ let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg
   }
   const continueGame = ():void=>{
     console.log("继续游戏")
+    testChange()
+
   }
+  const userDataStore= UserDataStore()
+  let volume = computed(()=>userDataStore.userDataState.optionData.volumeMain)
+  watch(volume,()=>{
+    console.log('volume',volume)
+    })
   const showMenuOption = ():void=>{
     guiStore.setShowMenuPanel(true)
   }
