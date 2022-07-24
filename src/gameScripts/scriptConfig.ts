@@ -47,5 +47,5 @@ export const addNextArgList = [
   commandType.setVar,
   commandType.unlockBgm,
   commandType.unlockCg,
-  commandType.filmMode,
+  // commandType.filmMode,
 ];

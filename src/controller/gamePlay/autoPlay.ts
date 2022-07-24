@@ -1,6 +1,6 @@
 import { ControllerStore } from "../../store/ControllerStore";
 import { UserDataStore } from "../../store/UserDataStore";
-const controllerStore=ControllerStore()
+import { nextSentence } from "./nextSentence";
 
 
 
@@ -8,6 +8,7 @@ const controllerStore=ControllerStore()
  * 停止自动播放
  */
  export const stopAuto = () => {
+  const controllerStore=ControllerStore()
   controllerStore.runtime_gamePlay.isAuto = false;
   // setButton(false);
   if (controllerStore.runtime_gamePlay.autoInterval !== null) {
@@ -25,6 +26,7 @@ const controllerStore=ControllerStore()
  */
 export const switchAuto = () => {
   // 现在正在自动播放
+  const controllerStore=ControllerStore()
   if (controllerStore.runtime_gamePlay.isAuto) {
     controllerStore.runtime_gamePlay.isAuto = false;
     // setButton(false);
@@ -41,7 +43,8 @@ export const switchAuto = () => {
 };
 
 export const autoNextSentence = () => {
-  controllerStore.nextSentence();
+  const controllerStore=ControllerStore()
+  nextSentence();
   controllerStore.runtime_gamePlay.autoTimeout = null;
 };
 
@@ -49,6 +52,7 @@ export const autoNextSentence = () => {
  * 自动播放的执行函数
  */
 const autoPlay = () => {
+  const controllerStore=ControllerStore()
   const userDataState = UserDataStore().userDataState
   const delay = userDataState.optionData.autoSpeed;
   const autoPlayDelay = 750 - 250 * delay;

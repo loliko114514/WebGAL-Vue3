@@ -7,6 +7,7 @@ import { cloneDeep } from "lodash"
 import { storeToRefs } from "pinia";
 import { ControllerStore } from "../../store/ControllerStore";
 import { unmountPerform } from "../perform/unmountPerform";
+import { nextSentence } from "./nextSentence";
 
 /**
  * 规范函数的类型
@@ -72,6 +73,6 @@ function goNextWhenOver() {
     // 有阻塞，提前结束
     setTimeout(goNextWhenOver, 100);
   } else {
-    controllerStore.nextSentence();
+    nextSentence();
   }
 }
