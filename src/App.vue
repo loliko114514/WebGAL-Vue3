@@ -13,6 +13,7 @@ import { GuiStore } from './store/GuiStore'
 import { ControllerStore } from './store/ControllerStore'
 import { onMounted, ref } from 'vue'
 import { resize } from "./util/resize"
+import { initializeScript } from './controller/initializeScript'
 
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
@@ -23,7 +24,7 @@ onMounted(()=>{
   window.onresize = ()=>{
     resize(rootDom)
   }
-  controllerStore.initializeScript()
+  initializeScript()
 })
 
 </script>

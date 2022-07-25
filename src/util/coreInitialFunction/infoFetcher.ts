@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getStorage } from "../../controller/storage/storageController";
 import { fileType } from "../../interface/coreInterface/sceneInterface";
 import { ControllerStore } from "../../store/ControllerStore";
 import { GuiStore } from "../../store/GuiStore";
@@ -31,7 +32,7 @@ export const infoFetcher= (url:string) => {
         }
         if (e[0] === 'Game_key') {
           controllerStore.gameInfo.gameKey = e[1];
-          controllerStore.getStorage();
+          getStorage();
         }
       });
     }
