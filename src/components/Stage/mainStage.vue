@@ -21,7 +21,7 @@
         return
       }
       // stopAll()
-      controllerStore.nextSentence()
+      nextSentence()
     }"
     id="FullScreenClick"
     class="FullScreenClick"/>
@@ -35,12 +35,12 @@ import TextBoxFilm from './TextBoxFilm.vue'
 import AudioContainer from './AudioContainer.vue';
 import { GuiStore } from '../../store/GuiStore';
 import { StageStore } from '../../store/StageStore';
-import { ControllerStore } from '../../store/ControllerStore';
 import { computed } from 'vue';
+import { nextSentence } from '../../controller/gamePlay/nextSentence';
 const stageStore = StageStore()
-const controllerStore = ControllerStore()
 const guiStore = GuiStore()
 const stageState = computed(()=>stageStore.stageState)
+
 
 
 </script>

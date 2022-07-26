@@ -27,6 +27,7 @@ import { nextSentence } from "./nextSentence";
   // 根据脚本类型切换函数
   if (scriptToFuncMap.has(script.command)) {
     funcToRun = scriptToFuncMap.get(script.command) as scriptFunction;
+    console.log('script.command',script.command)
   }
 
   // 调用脚本对应的函数

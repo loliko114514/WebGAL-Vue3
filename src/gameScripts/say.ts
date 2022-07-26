@@ -1,12 +1,14 @@
+import { getRandomPerformName } from "../controller/perform/getRandomPerformName";
 import { IPerform } from "../interface/coreInterface/performInterface";
 import { ISentence } from "../interface/coreInterface/sceneInterface";
+import { ControllerStore } from "../store/ControllerStore";
 import { StageStore } from "../store/StageStore";
+import { UserDataStore } from "../store/UserDataStore";
 
 export const say = (sentence: ISentence): IPerform => {
-  const stageState = StageStore().stageState
-  const styles = stageState.enableFilm === '' ? styles1 : styles2;
-  const userDataState = webgalStore.getState().userData;
-  const dispatch = webgalStore.dispatch;
+  const stageState = StageStore().stageState;
+  const userDataState = UserDataStore().userDataState;
+  const controllerStore = ControllerStore()
   let dialogToShow = sentence.content;
   let dialogKey = Math.random().toString();
   // 是否是继承语句
@@ -25,18 +27,18 @@ export const say = (sentence: ISentence): IPerform => {
     }
   });
   if (isConcat) {
-    dispatch(setStage({key: 'currentConcatDialogPrev', value: stageState.showText}));
+    stageState.currentConcatDialogPrev = stageState.showText
   } else {
-    dispatch(setStage({key: 'currentConcatDialogPrev', value: ''}));
+    stageState.currentConcatDialogPrev = ''
   }
   // 设置文本显示
-  dispatch(setStage({key: "showText", value: dialogToShow}));
+  stageState.showText = dialogToShow
   // 清除语音
-  dispatch(setStage({key: "vocal", value: ''}));
+  stageState.vocal = ''
   // 设置key
-  dispatch(setStage({key: 'currentDialogKey', value: dialogKey}));
+  stageState.currentDialogKey = dialogKey
   // 计算延迟
-  const textDelay = webgal_env.textInitialDelay - 20 * userDataState.optionData.textSpeed;
+  const textDelay = controllerStore.textInitialDelay - 20 * userDataState.optionData.textSpeed;
   // 本句延迟
   const sentenceDelay = textDelay * sentence.content.length;
   // // 设置延迟
@@ -55,15 +57,15 @@ export const say = (sentence: ISentence): IPerform => {
       showName = '';
     }
     if (e.key === 'vocal') {
-      playVocal(sentence);
+      // playVocal(sentence);
     }
   }
-  dispatch(setStage({key: "showName", value: showName}));
+  stageState.showName = showName as string
   setTimeout(() => {
-    const textElements = document.querySelectorAll('.' + styles.TextBox_textElement_start);
+    const textElements = document.querySelectorAll('.TextBox_textElement_start');
     const textArray = [...textElements];
     textArray.forEach((e) => {
-      e.className = styles.TextBox_textElement;
+      e.className = 'TextBox_textElement';
     });
   }, 0);
   const performInitName: string = getRandomPerformName();
@@ -77,10 +79,10 @@ export const say = (sentence: ISentence): IPerform => {
     isOver: false,
     isHoldOn: false,
     stopFunction: () => {
-      const textElements = document.querySelectorAll('.' + styles.TextBox_textElement);
+      const textElements = document.querySelectorAll('.TextBox_textElement');
       const textArray = [...textElements];
       textArray.forEach((e) => {
-        e.className = styles.TextBox_textElement_Settled;
+        e.className = 'TextBox_textElement_Settled';
       });
     },
     blockingNext: () => false,

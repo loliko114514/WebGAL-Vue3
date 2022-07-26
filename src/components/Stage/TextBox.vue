@@ -1,15 +1,15 @@
 <template>
 <div id="textBoxMain" class="TextBox_main">
   <div id="miniAvatar" class="miniAvatarContainer">
-      <img v-if="stageState.miniAvatar !== ''" className={styles.miniAvatarImg} alt="miniAvatar" src={stageState.miniAvatar}/>
+      <img v-if="miniAvatar !== ''" class='miniAvatarImg' alt="miniAvatar" :src='miniAvatar'/>
   </div>
-    <div v-if="stageState.showName !== ''" className={styles.TextBox_showName} :style="{'fontSize': '200%'}">{{stageState.showName}}</div>
+    <div v-if="showName !== ''" class='TextBox_showName' :style="{'fontSize': '200%'}">{{showName}}</div>
   <div :style="{'fontSize': size}">
     <span v-for="(e,i) in textArray"
       :id="i * textDelay+''"
       class="TextBox_textElement_start"
-      :key="stageState.currentDialogKey + i"
-      :style="{ 'animation-delay' : textDelay*i + 'ms'}">{e}</span>
+      :key="currentDialogKey + i"
+      :style="{ 'animation-delay' : textDelay*i + 'ms'}">{{e}}</span>
   </div>
 </div>
 </template>
@@ -19,12 +19,18 @@ import { computed } from '@vue/reactivity';
 import { StageStore } from '../../store/StageStore';
 import { UserDataStore } from '../../store/UserDataStore';
 import { ControllerStore } from '../../store/ControllerStore';
-const stageState = StageStore().stageState
+const stageStore = StageStore()
 const userDataStare = UserDataStore().userDataState
 const controllerStore = ControllerStore()
 const size = computed(()=>userDataStare.optionData.textSize * 50 + 200 +'%')
 const textDelay = computed(()=>controllerStore.textInitialDelay - 20 * userDataStare.optionData.textSpeed)
-const textArray:Array<string> = stageState.showText.split('')
+const textArray = computed(()=>{
+    const textArray =  stageStore.stageState.showText.split('')
+    return textArray
+}) 
+const miniAvatar = computed(()=>stageStore.stageState.miniAvatar)
+const showName = computed(()=>stageStore.stageState.showName)
+const currentDialogKey = computed(()=>stageStore.stageState.currentDialogKey)
 </script>
 
 <style lang="scss" scoped>

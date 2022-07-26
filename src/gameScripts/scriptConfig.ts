@@ -1,10 +1,11 @@
 import { IConfigInterface } from "../interface/coreInterface/configInterface";
 import { commandType } from "../interface/coreInterface/sceneInterface";
+import { changeBg } from "./changeBg";
 import { say } from "./say";
 
 export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'intro',scriptType:commandType.intro,scriptFunction:intro},
-  // {scriptString:'changeBg',scriptType:commandType.changeBg,scriptFunction:changeBg},
+  {scriptString:'changeBg',scriptType:commandType.changeBg,scriptFunction:changeBg},
   // {scriptString:'changeFigure',scriptType:commandType.changeFigure,scriptFunction:changeFigure},
   // {scriptString:'miniAvatar',scriptType:commandType.miniAvatar,scriptFunction:miniAvatar},
   // {scriptString:'changeScene',scriptType:commandType.changeScene,scriptFunction:changeSceneScript},
@@ -28,7 +29,7 @@ export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'showVars',scriptType:commandType.showVars,scriptFunction:showVars},
   // {scriptString:'unlockCg',scriptType:commandType.unlockCg,scriptFunction:unlockCg},
   // {scriptString:'unlockBgm',scriptType:commandType.unlockBgm,scriptFunction:unlockBgm},
-  // {scriptString:'say',scriptType:commandType.say,scriptFunction:say},
+  {scriptString:'say',scriptType:commandType.say,scriptFunction:say},
   // {scriptString:'filmMode',scriptType:commandType.filmMode,scriptFunction:filmMode},
 ];
 export const addNextArgList = [

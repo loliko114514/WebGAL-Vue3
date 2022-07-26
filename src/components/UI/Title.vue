@@ -30,6 +30,7 @@ import { GuiStore } from '../../store/GuiStore'
 import { ControllerStore } from '../../store/ControllerStore';
 import { computed, ref, watch } from 'vue';
 import { testChange } from '../../controller/gamePlay/fastSkip'
+import { nextSentence } from '../../controller/gamePlay/nextSentence';
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
 let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg}.png)`)
@@ -37,7 +38,7 @@ let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg
     guiStore.guiState.showTitle = false
     if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
     controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
-      controllerStore.nextSentence() 
+      nextSentence() 
     }
   }
   const continueGame = ():void=>{
