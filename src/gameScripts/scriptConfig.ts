@@ -9,7 +9,7 @@ export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'changeFigure',scriptType:commandType.changeFigure,scriptFunction:changeFigure},
   // {scriptString:'miniAvatar',scriptType:commandType.miniAvatar,scriptFunction:miniAvatar},
   // {scriptString:'changeScene',scriptType:commandType.changeScene,scriptFunction:changeSceneScript},
-  // {scriptString:'choose',scriptType:commandType.choose,scriptFunction:choose},
+  {scriptString:'choose',scriptType:commandType.choose,scriptFunction:choose},
   // {scriptString:'end',scriptType:commandType.end,scriptFunction:end},
   // {scriptString:'bgm',scriptType:commandType.bgm,scriptFunction:bgm},
   // {scriptString:'playVideo',scriptType:commandType.video,scriptFunction:playVideo},

@@ -29,7 +29,6 @@
 import { GuiStore } from '../../store/GuiStore'
 import { ControllerStore } from '../../store/ControllerStore';
 import { computed, ref, watch } from 'vue';
-import { testChange } from '../../controller/gamePlay/fastSkip'
 import { nextSentence } from '../../controller/gamePlay/nextSentence';
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()

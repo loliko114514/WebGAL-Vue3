@@ -1,0 +1,55 @@
+<template>
+<div class='Choose_item' :key='e[0]+i' @click="() => {
+  if (e[1].match(/\./)) {
+    changeScene(e[1], e[0]);
+  } else {
+    jmp(e[1])
+  }
+  unmountPerform('choose')
+}
+">
+  {e[0]}
+</div>
+</template>
+
+<script setup lang='ts'>
+
+</script>
+
+<style lang="scss" scoped>
+.Choose_Main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 13;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.Choose_item {
+  font-family: "思源宋体", serif;
+  cursor: pointer;
+  min-width: 50%;
+  padding: 0.25em 1em 0.25em 1em;
+  font-size: 265%;
+  color: #8E354A;
+  text-align: center;
+  border-radius: 4px;
+  border: 3px solid rgba(0, 0, 0, 0);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.65);
+  margin: 0.25em 0 0.25em 0;
+  transition: background-color 0.5s, border 0.5s, font-weight 0.5s, box-shadow 0.5s;
+}
+
+.Choose_item:hover {
+  //font-weight: bold;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  border: 3px solid #8E354A;
+}
+
+</style>

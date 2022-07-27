@@ -3,7 +3,7 @@
  * @param sceneList 需要预加载的场景文件列表
  */
  import { sceneFetcher } from '../sceneFetcher';
- import { sceneParser } from '../parser/scenParser'; 
+ import { sceneParser } from '../parser/sceneParser'; 
  import { ControllerStore } from '../../store/ControllerStore'; 
  
  export const scenePrefetcher = (sceneList: Array<string>): void => {

@@ -2,7 +2,7 @@ import { fileType } from "../interface/coreInterface/sceneInterface";
 import { ControllerStore } from "../store/ControllerStore";
 import { assetSetter } from "../util/assetSetter";
 import { infoFetcher } from "../util/coreInitialFunction/infoFetcher";
-import { sceneParser } from "../util/parser/scenParser";
+import { sceneParser } from "../util/parser/sceneParser";
 import { sceneFetcher } from "../util/sceneFetcher";
 
 /**

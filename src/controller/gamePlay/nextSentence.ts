@@ -10,10 +10,11 @@ import { scriptExecutor } from "./scriptExecutor";
  * 进行下一句
  */
  export const nextSentence = () => {
-  // 如果当前显示标题，那么不进行下一句
+
   const guiStore = GuiStore()
   const controllerStore = ControllerStore()
   const stageStore = StageStore()
+    // 如果当前显示标题，那么不进行下一句
   if (guiStore.guiState.showTitle) {
     return;
   }
