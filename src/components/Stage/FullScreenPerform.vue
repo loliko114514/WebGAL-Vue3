@@ -3,11 +3,12 @@
   <div id="videoContainer"/>
   <div class="introContainer" id="introContainer"/>
   <div id="pixiContianer"/>
-  <div id="chooseContainer"/>
+  <ChooseContainer/>
 </div>;
 </template>
 
 <script setup lang='ts'>
+import ChooseContainer from './ChooseContainer.vue';
 import { StageStore } from '../../store/StageStore';
 import { computed } from '@vue/reactivity';
 import { ref } from 'vue';

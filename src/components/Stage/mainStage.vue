@@ -33,6 +33,7 @@ import FigureContainer  from './FigureContainer.vue'
 import TextBox from './TextBox.vue'
 import TextBoxFilm from './TextBoxFilm.vue'
 import AudioContainer from './AudioContainer.vue';
+import FullScreenPerform from './FullScreenPerform.vue';
 import { GuiStore } from '../../store/GuiStore';
 import { StageStore } from '../../store/StageStore';
 import { computed } from 'vue';

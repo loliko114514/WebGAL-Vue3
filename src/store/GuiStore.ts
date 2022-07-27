@@ -14,6 +14,7 @@ export const GuiStore = defineStore('GuiStore',{
           titleBg: 'Title',
           titleBgm: 'Title',
           showExtra: false,
+          showChoose: false
         }
       }
     },

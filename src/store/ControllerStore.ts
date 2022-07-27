@@ -19,6 +19,7 @@ export const ControllerStore = defineStore('ControllerStore',{
   state:()=>{
     return{
       textInitialDelay:<number> 80,
+      chooselist:<string[][]> [], // 选项列表
       runtime_currentBacklog:<Array<IBacklogItem>>[],
       runtime_currentSceneData:<ISceneData>{
         currentSentenceId: 0,// 当前语句ID

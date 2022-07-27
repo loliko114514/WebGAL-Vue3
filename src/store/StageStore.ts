@@ -25,7 +25,7 @@ export const StageStore = defineStore('StageStore',{
         currentDialogKey: 'initial',
         // currentPerformDelay: 0
         currentConcatDialogPrev:'',
-        enableFilm:'',
+        enableFilm:''
       },
     }
   },

@@ -1,6 +1,7 @@
 import { IConfigInterface } from "../interface/coreInterface/configInterface";
 import { commandType } from "../interface/coreInterface/sceneInterface";
 import { changeBg } from "./changeBg";
+import { choose } from "./choose";
 import { say } from "./say";
 
 export const scriptConfig: IConfigInterface[] = [

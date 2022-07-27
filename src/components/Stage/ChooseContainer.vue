@@ -1,19 +1,33 @@
 <template>
-<div class='Choose_item' :key='e[0]+i' @click="() => {
-  if (e[1].match(/\./)) {
-    changeScene(e[1], e[0]);
-  } else {
-    jmp(e[1])
+<div class="Choose_Main" v-if="guiStore.guiState.showChoose">
+  <div v-for="(e,i) in chooselist" class='Choose_item' :key='e[0]+i' @click="() => {
+    if (e[1].match(/\./)) {
+      changeScene(e[1], e[0]);
+    } else {
+      jmp(e[1])
+    }
+    unmountPerform('choose')
+    guistore.guiState.showChoose = false
   }
-  unmountPerform('choose')
-}
-">
-  {e[0]}
+  ">
+    {{e[0]}}
+  </div>
 </div>
 </template>
 
 <script setup lang='ts'>
+import { computed } from '@vue/reactivity';
+import { unmountPerform } from '../../controller/perform/unmountPerform';
+import { changeScene } from '../../controller/scene/changeScene';
+import { jmp } from '../../gameScripts/function/jmp';
+import { ControllerStore } from '../../store/ControllerStore';
+import { GuiStore } from '../../store/GuiStore';
 
+const guiStore = GuiStore()
+const controllerStore = ControllerStore()
+const chooselist = computed(()=>controllerStore.chooselist)
+const guistore = GuiStore()
+  
 </script>
 
 <style lang="scss" scoped>
