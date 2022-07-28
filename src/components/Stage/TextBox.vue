@@ -27,7 +27,7 @@ const textDelay = computed(()=>controllerStore.textInitialDelay - 20 * userDataS
 const textArray = computed(()=>{
     const textArray =  stageStore.stageState.showText.split('')
     return textArray
-}) 
+})
 const miniAvatar = computed(()=>stageStore.stageState.miniAvatar)
 const showName = computed(()=>stageStore.stageState.showName)
 const currentDialogKey = computed(()=>stageStore.stageState.currentDialogKey)

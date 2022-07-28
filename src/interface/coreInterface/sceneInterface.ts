@@ -27,7 +27,8 @@ export enum commandType {
   callScene,//调用场景
   showVars,
   unlockCg,
-  unlockBgm
+  unlockBgm,
+  filmMode
 }
 
 /**

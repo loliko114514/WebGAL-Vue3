@@ -2,6 +2,9 @@ import { IConfigInterface } from "../interface/coreInterface/configInterface";
 import { commandType } from "../interface/coreInterface/sceneInterface";
 import { changeBg } from "./changeBg";
 import { choose } from "./choose";
+import { filmMode } from "./filmMode";
+import { jumpLabel } from "./jumpLabel";
+import { label } from "./label";
 import { say } from "./say";
 
 export const scriptConfig: IConfigInterface[] = [
@@ -22,8 +25,8 @@ export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'setFigFilter',scriptType:commandType.setFigFilter,scriptFunction:setFigFilter},
   // {scriptString:'pixiInit',scriptType:commandType.pixiInit,scriptFunction:pixiInit},
   // {scriptString:'pixiPerform',scriptType:commandType.pixi,scriptFunction:pixi},
-  // {scriptString:'label',scriptType:commandType.label,scriptFunction:label},
-  // {scriptString:'jumpLabel',scriptType:commandType.jumpLabel,scriptFunction:jumpLabel},
+  {scriptString:'label',scriptType:commandType.label,scriptFunction:label},
+  {scriptString:'jumpLabel',scriptType:commandType.jumpLabel,scriptFunction:jumpLabel},
   // // {scriptString:'chooseLabel',scriptType:commandType.chooseLabel,scriptFunction:setFigFilter},
   // {scriptString:'setVar',scriptType:commandType.setVar,scriptFunction:setVar},
   // {scriptString:'callScene',scriptType:commandType.callScene,scriptFunction:changeSceneScript},
@@ -31,7 +34,7 @@ export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'unlockCg',scriptType:commandType.unlockCg,scriptFunction:unlockCg},
   // {scriptString:'unlockBgm',scriptType:commandType.unlockBgm,scriptFunction:unlockBgm},
   {scriptString:'say',scriptType:commandType.say,scriptFunction:say},
-  // {scriptString:'filmMode',scriptType:commandType.filmMode,scriptFunction:filmMode},
+  {scriptString:'filmMode',scriptType:commandType.filmMode,scriptFunction:filmMode},
 ];
 export const addNextArgList = [
   commandType.bgm,
@@ -49,5 +52,5 @@ export const addNextArgList = [
   commandType.setVar,
   commandType.unlockBgm,
   commandType.unlockCg,
-  // commandType.filmMode,
+  commandType.filmMode,
 ];

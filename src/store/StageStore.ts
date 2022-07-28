@@ -32,6 +32,6 @@ export const StageStore = defineStore('StageStore',{
   actions:{
     resetStageState(stageState:IStageState){
       Object.assign(this.stageState,stageState)
-    },
+    }
   }
 })
