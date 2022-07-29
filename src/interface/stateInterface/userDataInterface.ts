@@ -56,7 +56,14 @@ export interface ISaveData {
  export interface IUserData {
   saveData: Array<ISaveData> // 用户存档数据
   optionData: IOptionData // 用户设置选项数据
+  appreciationData: IAppreciation;
 }
+
+export interface IAppreciation {
+  bgm: Array<IAppreciationAsset>;
+  cg: Array<IAppreciationAsset>;
+}
+
 
 export interface IAppreciationAsset {
   name: string;

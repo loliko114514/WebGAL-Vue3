@@ -44,5 +44,31 @@ export const UserDataStore = defineStore('UserDataStore',{
       resetUserData(userDataState:IUserData){
         Object.assign(this.userDataState,userDataState)
       },
+      unlockCgInUserData(name:string,url:string,series:string){
+        let isExist = false;
+        this.userDataState.appreciationData.cg.forEach(e => {
+          if (name === e.name) {
+            isExist = true;
+            e.url = url;
+            e.series = series;
+          }
+        });
+        if (!isExist) {
+          this.userDataState.appreciationData.cg.push({name,url,series});
+        }
+      },
+      unlockBgmInUserData(name:string,url:string,series:string){
+        let isExist = false;
+        this.userDataState.appreciationData.bgm.forEach(e => {
+          if (name === e.name) {
+            isExist = true;
+            e.url = url;
+            e.series = series;
+          }
+        });
+        if (!isExist) {
+          this.userDataState.appreciationData.bgm.push({name,url,series});
+        }
+      }
     }
 })

@@ -6,6 +6,8 @@ import { filmMode } from "./filmMode";
 import { jumpLabel } from "./jumpLabel";
 import { label } from "./label";
 import { say } from "./say";
+import { unlockBgm } from "./unlockBgm";
+import { unlockCg } from "./unlockCg";
 
 export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'intro',scriptType:commandType.intro,scriptFunction:intro},
@@ -31,8 +33,8 @@ export const scriptConfig: IConfigInterface[] = [
   // {scriptString:'setVar',scriptType:commandType.setVar,scriptFunction:setVar},
   // {scriptString:'callScene',scriptType:commandType.callScene,scriptFunction:changeSceneScript},
   // {scriptString:'showVars',scriptType:commandType.showVars,scriptFunction:showVars},
-  // {scriptString:'unlockCg',scriptType:commandType.unlockCg,scriptFunction:unlockCg},
-  // {scriptString:'unlockBgm',scriptType:commandType.unlockBgm,scriptFunction:unlockBgm},
+  {scriptString:'unlockCg',scriptType:commandType.unlockCg,scriptFunction:unlockCg},
+  {scriptString:'unlockBgm',scriptType:commandType.unlockBgm,scriptFunction:unlockBgm},
   {scriptString:'say',scriptType:commandType.say,scriptFunction:say},
   {scriptString:'filmMode',scriptType:commandType.filmMode,scriptFunction:filmMode},
 ];
