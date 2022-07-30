@@ -1,5 +1,11 @@
 <template>
-    <div class="Title_main">
+    <div class="Title_main" :style="{'background-image':`url(${titleBg})`}" >
+      <div
+          id="play_title_bgm_target"
+          @click="() => {
+            playBgm(guiStore.guiState.titleBgm);
+          }"
+        />
       <div class="Title_buttonList">
         <div class="Title_button" id="leftTitleButton" @click="hideTitle()">
           <div class="Title_button_text Title_button_text_up">开始游戏</div>
@@ -28,11 +34,12 @@
 <script setup lang='ts'>
 import { GuiStore } from '../../store/GuiStore'
 import { ControllerStore } from '../../store/ControllerStore';
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { nextSentence } from '../../controller/gamePlay/nextSentence';
+import { playBgm } from '../../controller/stage/playBgm';
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
-let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg}.png)`)
+const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
   const hideTitle = ():void=>{
     guiStore.guiState.showTitle = false
     if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
@@ -52,6 +59,8 @@ let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg
   const exit = ():void=>{
     console.log("退出游戏")
   }
+
+
 </script>
   
 <style lang="scss" scoped>
@@ -62,7 +71,6 @@ let titleBg = ref(`url(public/game/background/${guiStore.$state.guiState.titleBg
   z-index: 13;
   background-repeat: no-repeat;
   background-size:cover;
-  background-image: v-bind(titleBg); 
 }
 
 

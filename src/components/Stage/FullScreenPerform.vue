@@ -1,7 +1,7 @@
 <template>
 <div class="FullScreenPerform_main" :style="{'width': stageWidth, 'height': stageHeight, 'top': top}">
-  <div id="videoContainer"/>
-  <div class="introContainer" id="introContainer"/>
+  <VideoContainer/>
+  <IntroContainer/>
   <div id="pixiContianer"/>
   <ChooseContainer/>
 </div>;
@@ -9,6 +9,8 @@
 
 <script setup lang='ts'>
 import ChooseContainer from './ChooseContainer.vue';
+import VideoContainer from './VideoContainer.vue';
+import IntroContainer from './IntroContainer.vue';
 import { StageStore } from '../../store/StageStore';
 import { computed } from '@vue/reactivity';
 import { ref } from 'vue';
@@ -55,25 +57,6 @@ let top = computed(()=>{
   width: 100%;
   height: 100%;
   z-index: 11;
-}
-
-.introContainer {
-  box-sizing: border-box;
-  padding: 3em 4em 3em 4em;
-  font-size: 350%;
-  position: absolute;
-  z-index: 11;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 1);
-  color: white;
-  display: none;
-}
-
-.introElement {
-  opacity: 0;
-  animation: intro_showSoftly 1.5s ease-out forwards;
-  font-family: "思源宋体", serif;
 }
 
 @keyframes intro_showSoftly {

@@ -12,6 +12,7 @@ export interface IGuiState {
   titleBg: string; // 标题背景图片
   showExtra: boolean;
   showChoose: boolean;
+  showIntro: boolean;
 }
 
 export enum MenuPanelTag {

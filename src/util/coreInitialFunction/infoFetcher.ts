@@ -5,6 +5,12 @@ import { ControllerStore } from "../../store/ControllerStore";
 import { GuiStore } from "../../store/GuiStore";
 import { assetSetter } from "../assetSetter";
 
+declare global {
+  interface Window {
+      renderPromise?: Function;
+  }
+}
+
 export const infoFetcher= (url:string) => {
   const guiStore = GuiStore()
   const controllerStore = ControllerStore()
@@ -36,7 +42,7 @@ export const infoFetcher= (url:string) => {
         }
       });
     }
-    // window?.renderPromise?.();
-    // delete window.renderPromise;
+    window?.renderPromise?.();
+    delete window.renderPromise;
   })
 }

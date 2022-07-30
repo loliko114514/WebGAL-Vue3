@@ -15,8 +15,8 @@
 
 <script setup lang='ts'>
 import { StageStore } from '../../store/StageStore';
-
-const stageState = StageStore().stageState
+import { computed } from 'vue';
+const stageState = computed(()=>StageStore().stageState)
 </script>
 
 <style lang="scss" scoped>

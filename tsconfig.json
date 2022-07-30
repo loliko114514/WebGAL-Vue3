@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom","dom.iterable"]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/gameScripts/runScript"],
   "references": [{ "path": "./tsconfig.node.json" }]

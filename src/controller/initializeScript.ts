@@ -4,6 +4,7 @@ import { assetSetter } from "../util/assetSetter";
 import { infoFetcher } from "../util/coreInitialFunction/infoFetcher";
 import { sceneParser } from "../util/parser/sceneParser";
 import { sceneFetcher } from "../util/sceneFetcher";
+import { pixiController } from "./perform/pixi/pixiController";
 
 /**
  * 引擎初始化函数
@@ -33,7 +34,7 @@ import { sceneFetcher } from "../util/sceneFetcher";
   /**
    * 启动Pixi
    */
-  // pixiController(true);
+  pixiController(true);
 
   /**
    * 如果有 Service Worker ，则卸载所有 Service Worker

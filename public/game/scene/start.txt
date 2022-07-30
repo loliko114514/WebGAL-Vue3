@@ -23,6 +23,7 @@ pixiInit;
 WebGAL:特效的演示已经结束，现在我们正式开始吧！;
 label:toStart;
 playVideo:OP.mp4;
+intro:这是旁白测试1|这是旁白测试2|这是旁白测试3;
 changeBg:c3.jpg -next;
 unlockCg:c3.jpg -name=cafe;
 setBgAni:bg_focusLeft 1.5s;

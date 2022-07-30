@@ -6,7 +6,7 @@ import { StageStore } from "../store/StageStore";
 import { UserDataStore } from "../store/UserDataStore";
 
 export const say = (sentence: ISentence): IPerform => {
-  const stageState = StageStore().stageState;
+  const stageStore = StageStore()
   const userDataState = UserDataStore().userDataState;
   const controllerStore = ControllerStore()
   let dialogToShow = sentence.content;
@@ -18,8 +18,8 @@ export const say = (sentence: ISentence): IPerform => {
   // 如果是concat，那么就继承上一句的key，并且继承上一句对话。
   sentence.args.forEach(e => {
     if (e.key === 'concat' && e.value === true) {
-      dialogKey = stageState.currentDialogKey;
-      dialogToShow = stageState.showText + dialogToShow;
+      dialogKey = stageStore.stageState.currentDialogKey;
+      dialogToShow = stageStore.stageState.showText + dialogToShow;
       isConcat = true;
     }
     if (e.key === 'notend' && e.value === true) {
@@ -27,16 +27,16 @@ export const say = (sentence: ISentence): IPerform => {
     }
   });
   if (isConcat) {
-    stageState.currentConcatDialogPrev = stageState.showText
+    stageStore.stageState.currentConcatDialogPrev = stageStore.stageState.showText
   } else {
-    stageState.currentConcatDialogPrev = ''
+    stageStore.stageState.currentConcatDialogPrev = ''
   }
   // 设置文本显示
-  stageState.showText = dialogToShow
+  stageStore.stageState.showText = dialogToShow
   // 清除语音
-  stageState.vocal = ''
+  stageStore.stageState.vocal = ''
   // 设置key
-  stageState.currentDialogKey = dialogKey
+  stageStore.stageState.currentDialogKey = dialogKey
   // 计算延迟
   const textDelay = controllerStore.textInitialDelay - 20 * userDataState.optionData.textSpeed;
   // 本句延迟
@@ -48,7 +48,7 @@ export const say = (sentence: ISentence): IPerform => {
   //   dispatch(setStage({key: 'currentPerformDelay', value: 0}));
   // }
   // 设置显示的角色名称
-  let showName: string | number | boolean = stageState.showName; // 先默认继承
+  let showName: string | number | boolean = stageStore.stageState.showName; // 先默认继承
   for (const e of sentence.args) {
     if (e.key === 'speaker') {
       showName = e.value;
@@ -60,7 +60,7 @@ export const say = (sentence: ISentence): IPerform => {
       // playVocal(sentence);
     }
   }
-  stageState.showName = showName as string
+  stageStore.stageState.showName = showName as string
   setTimeout(() => {
     const textElements = document.querySelectorAll('.TextBox_textElement_start');
     const textArray = [...textElements];
@@ -83,7 +83,7 @@ export const say = (sentence: ISentence): IPerform => {
       const textArray = [...textElements];
       textArray.forEach((e) => {
         e.className = 'TextBox_textElement_Settled';
-      });
+      })
     },
     blockingNext: () => false,
     blockingAuto: () => true,

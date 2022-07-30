@@ -12,6 +12,7 @@
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "pinia": "^2.0.14",
+    "pixi.js": "^6.5.1",
     "vue": "^3.2.25"
   },
   "devDependencies": {
