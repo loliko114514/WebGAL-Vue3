@@ -23,7 +23,6 @@ pixiInit;
 WebGAL:特效的演示已经结束，现在我们正式开始吧！;
 label:toStart;
 playVideo:OP.mp4;
-intro:这是旁白测试1|这是旁白测试2|这是旁白测试3;
 changeBg:c3.jpg -next;
 unlockCg:c3.jpg -name=cafe;
 setBgAni:bg_focusLeft 1.5s;
@@ -33,9 +32,11 @@ changeFigure:m2.png -left -next;
 bgm:cb1.mp3;
 unlockBgm:cb1.mp3 -name=ひとすじの光明;
 setFigAni:leftIn 1s -left -next;
+setVar:玩家名=Mahiru
 米咖多:蛋包饭是栞那做的，但红茶是夏目泡的。 -v1.ogg;
 昂晴:......;
 顺便问一下，你是打算做什么的？;
+showVars:玩家名
 changeFigure:m1.png -left -next;
 米咖多:就是倒饮料。然后咖啡和红茶的冲泡方式我还是记住了的。 -v2.ogg;
 昂晴:这、这样么......;

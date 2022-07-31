@@ -32,6 +32,10 @@ export const StageStore = defineStore('StageStore',{
   actions:{
     resetStageState(stageState:IStageState){
       Object.assign(this.stageState,stageState)
+    },
+    setStageVar(key:string,value:number | string | boolean){
+      console.log('setStageVar',value)
+      this.stageState.GameVar[key] = value
     }
   }
 })

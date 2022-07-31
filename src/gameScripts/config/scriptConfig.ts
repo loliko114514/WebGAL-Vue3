@@ -1,30 +1,36 @@
-import { IConfigInterface } from "../interface/coreInterface/configInterface";
-import { commandType } from "../interface/coreInterface/sceneInterface";
-import { bgm } from "./bgm";
-import { changeBg } from "./changeBg";
-import { changeFigure } from "./changeFigure";
-import { choose } from "./choose";
-import { filmMode } from "./filmMode";
-import { intro } from "./intro";
-import { jumpLabel } from "./jumpLabel";
-import { label } from "./label";
-import { pixi } from "./pixi";
-import { pixiInit } from "./pixiInit";
-import { playVideo } from "./playVideo";
-import { say } from "./say";
-import { setBgAni } from "./setBgAni";
-import { setBgFilter } from "./setBgFilter";
-import { setBgTransform } from "./setBgTransform";
-import { setFigAni } from "./setFigAni";
-import { unlockBgm } from "./unlockBgm";
-import { unlockCg } from "./unlockCg";
+import { IConfigInterface } from "../../interface/coreInterface/configInterface";
+import { commandType } from "../../interface/coreInterface/sceneInterface";
+import { bgm } from "../bgm";
+import { changeBg } from "../changeBg";
+import { changeFigure } from "../changeFigure";
+import { changeSceneScript } from "../changeSceneScript";
+import { choose } from "../choose";
+import { filmMode } from "../filmMode";
+import { intro } from "../intro";
+import { jumpLabel } from "../jumpLabel";
+import { label } from "../label";
+import { miniAvatar } from "../miniAvatar";
+import { pixi } from "../pixi";
+import { pixiInit } from "../pixiInit";
+import { playVideo } from "../playVideo";
+import { say } from "../say";
+import { setBgAni } from "../setBgAni";
+import { setBgFilter } from "../setBgFilter";
+import { setBgTransform } from "../setBgTransform";
+import { setFigAni } from "../setFigAni";
+import { setFigFilter } from "../setFigFilter";
+import { setFigTransform } from "../setFigTransform";
+import { setVar } from "../setVar";
+import { showVars } from "../showVars";
+import { unlockBgm } from "../unlockBgm";
+import { unlockCg } from "../unlockCg";
 
 export const scriptConfig: IConfigInterface[] = [
   {scriptString:'intro',scriptType:commandType.intro,scriptFunction:intro},
   {scriptString:'changeBg',scriptType:commandType.changeBg,scriptFunction:changeBg},
   {scriptString:'changeFigure',scriptType:commandType.changeFigure,scriptFunction:changeFigure},
-  // {scriptString:'miniAvatar',scriptType:commandType.miniAvatar,scriptFunction:miniAvatar},
-  // {scriptString:'changeScene',scriptType:commandType.changeScene,scriptFunction:changeSceneScript},
+  {scriptString:'miniAvatar',scriptType:commandType.miniAvatar,scriptFunction:miniAvatar},
+  {scriptString:'changeScene',scriptType:commandType.changeScene,scriptFunction:changeSceneScript},
   {scriptString:'choose',scriptType:commandType.choose,scriptFunction:choose},
   // {scriptString:'end',scriptType:commandType.end,scriptFunction:end},
   {scriptString:'bgm',scriptType:commandType.bgm,scriptFunction:bgm},
@@ -33,16 +39,16 @@ export const scriptConfig: IConfigInterface[] = [
   {scriptString:'setFigAni',scriptType:commandType.perform_FigAni,scriptFunction:setFigAni},
   {scriptString:'setBgTransform',scriptType:commandType.setBgTransform,scriptFunction:setBgTransform},
   {scriptString:'setBgFilter',scriptType:commandType.setBgFilter,scriptFunction:setBgFilter},
-  // {scriptString:'setFigTransform',scriptType:commandType.setFigTransform,scriptFunction:setFigTransform},
-  // {scriptString:'setFigFilter',scriptType:commandType.setFigFilter,scriptFunction:setFigFilter},
+  {scriptString:'setFigTransform',scriptType:commandType.setFigTransform,scriptFunction:setFigTransform},
+  {scriptString:'setFigFilter',scriptType:commandType.setFigFilter,scriptFunction:setFigFilter},
   {scriptString:'pixiInit',scriptType:commandType.pixiInit,scriptFunction:pixiInit},
   {scriptString:'pixiPerform',scriptType:commandType.pixi,scriptFunction:pixi},
   {scriptString:'label',scriptType:commandType.label,scriptFunction:label},
   {scriptString:'jumpLabel',scriptType:commandType.jumpLabel,scriptFunction:jumpLabel},
-  // // {scriptString:'chooseLabel',scriptType:commandType.chooseLabel,scriptFunction:setFigFilter},
-  // {scriptString:'setVar',scriptType:commandType.setVar,scriptFunction:setVar},
-  // {scriptString:'callScene',scriptType:commandType.callScene,scriptFunction:changeSceneScript},
-  // {scriptString:'showVars',scriptType:commandType.showVars,scriptFunction:showVars},
+  // {scriptString:'chooseLabel',scriptType:commandType.chooseLabel,scriptFunction:setFigFilter},
+  {scriptString:'setVar',scriptType:commandType.setVar,scriptFunction:setVar},
+  {scriptString:'callScene',scriptType:commandType.callScene,scriptFunction:changeSceneScript},
+  {scriptString:'showVars',scriptType:commandType.showVars,scriptFunction:showVars},
   {scriptString:'unlockCg',scriptType:commandType.unlockCg,scriptFunction:unlockCg},
   {scriptString:'unlockBgm',scriptType:commandType.unlockBgm,scriptFunction:unlockBgm},
   {scriptString:'say',scriptType:commandType.say,scriptFunction:say},

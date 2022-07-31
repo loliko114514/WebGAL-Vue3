@@ -1,5 +1,5 @@
 import { say } from "../../gameScripts/say";
-import { scriptConfig } from "../../gameScripts/scriptConfig";
+import { scriptConfig } from "../../gameScripts/config/scriptConfig";
 import { initPerform, IPerform } from "../../interface/coreInterface/performInterface";
 import { ISentence } from "../../interface/coreInterface/sceneInterface";
 import { StageStore } from "../../store/StageStore";

@@ -7,7 +7,7 @@ import { UserDataStore } from "../store/UserDataStore";
 
 export const say = (sentence: ISentence): IPerform => {
   const stageStore = StageStore()
-  const userDataState = UserDataStore().userDataState;
+  const userDataStore = UserDataStore()
   const controllerStore = ControllerStore()
   let dialogToShow = sentence.content;
   let dialogKey = Math.random().toString();
@@ -38,7 +38,7 @@ export const say = (sentence: ISentence): IPerform => {
   // 设置key
   stageStore.stageState.currentDialogKey = dialogKey
   // 计算延迟
-  const textDelay = controllerStore.textInitialDelay - 20 * userDataState.optionData.textSpeed;
+  const textDelay = controllerStore.textInitialDelay - 20 * userDataStore.userDataState.optionData.textSpeed;
   // 本句延迟
   const sentenceDelay = textDelay * sentence.content.length;
   // // 设置延迟
@@ -69,7 +69,7 @@ export const say = (sentence: ISentence): IPerform => {
     });
   }, 0);
   const performInitName: string = getRandomPerformName();
-  let endDelay = 750 - userDataState.optionData.textSpeed * 250;
+  let endDelay = 750 - userDataStore.userDataState.optionData.textSpeed * 250;
   if (isNotend) {
     endDelay = 0;
   }

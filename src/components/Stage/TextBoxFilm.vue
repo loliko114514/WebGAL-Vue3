@@ -101,19 +101,5 @@ let prevLength = computed(()=>stageStore.stageState.currentConcatDialogPrev.leng
   }
 }
 
-.miniAvatarContainer {
-  position: absolute;
-  height: 80%;
-  width: 17%;
-  bottom: 0;
-  left: 0.5em;
-}
-
-.miniAvatarImg {
-  max-height: 100%;
-  max-width: 100%;
-  position: absolute;
-  bottom: 0;
-}
 
 </style>

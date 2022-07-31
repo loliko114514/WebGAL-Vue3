@@ -1,4 +1,4 @@
-import { addNextArgList, scriptConfig } from '../../../gameScripts/scriptConfig';
+import { addNextArgList, scriptConfig } from '../../../gameScripts/config/scriptConfig';
 import {commandType, parsedCommand} from '../../../interface/coreInterface/sceneInterface';
 
 /**
