@@ -23,6 +23,18 @@ export const ControllerStore = defineStore('ControllerStore',{
       videoSrc:<string> '',//视频路径
       introArray:<Array<string>> [],//黑屏文字
       runtime_currentBacklog:<Array<IBacklogItem>>[],
+      initSceneData:<ISceneData>{
+        currentSentenceId: 0,// 当前语句ID
+        sceneStack: [],
+        // 初始场景，没有数据
+        currentScene: {
+          sceneName: '', // 场景名称
+          sceneUrl: '', // 场景url
+          sentenceList: [], // 语句列表
+          assetsList: [], // 资源列表
+          subSceneList: [] // 子场景列表
+        }
+      },
       runtime_currentSceneData:<ISceneData>{
         currentSentenceId: 0,// 当前语句ID
         sceneStack: [],
