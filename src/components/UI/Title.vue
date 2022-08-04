@@ -37,14 +37,17 @@ import { ControllerStore } from '../../store/ControllerStore';
 import { computed, onMounted, ref, watch } from 'vue';
 import { nextSentence } from '../../controller/gamePlay/nextSentence';
 import { playBgm } from '../../controller/stage/playBgm';
+import { StageStore } from '../../store/StageStore';
 const guiStore = GuiStore()
+const stageStore = StageStore()
 const controllerStore = ControllerStore()
 const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
   const hideTitle = ():void=>{
+    stageStore.stageState.bgm = ''
     guiStore.guiState.showTitle = false
     if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
     controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
-      nextSentence() 
+      nextSentence()
     }
   }
   const continueGame = ():void=>{

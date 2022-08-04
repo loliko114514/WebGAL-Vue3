@@ -6,7 +6,6 @@
 </template>
 
 <script setup lang='ts'>
-import { onMounted } from 'vue';
 import { playBgm } from '../../controller/stage/playBgm';
 import { GuiStore } from '../../store/GuiStore';
 import { StageStore } from '../../store/StageStore';
