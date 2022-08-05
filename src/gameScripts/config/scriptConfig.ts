@@ -5,6 +5,7 @@ import { changeBg } from "../changeBg";
 import { changeFigure } from "../changeFigure";
 import { changeSceneScript } from "../changeSceneScript";
 import { choose } from "../choose";
+import { end } from "../end";
 import { filmMode } from "../filmMode";
 import { intro } from "../intro";
 import { jumpLabel } from "../jumpLabel";
@@ -32,7 +33,7 @@ export const scriptConfig: IConfigInterface[] = [
   {scriptString:'miniAvatar',scriptType:commandType.miniAvatar,scriptFunction:miniAvatar},
   {scriptString:'changeScene',scriptType:commandType.changeScene,scriptFunction:changeSceneScript},
   {scriptString:'choose',scriptType:commandType.choose,scriptFunction:choose},
-  // {scriptString:'end',scriptType:commandType.end,scriptFunction:end},
+  {scriptString:'end',scriptType:commandType.end,scriptFunction:end},
   {scriptString:'bgm',scriptType:commandType.bgm,scriptFunction:bgm},
   {scriptString:'playVideo',scriptType:commandType.video,scriptFunction:playVideo},
   {scriptString:'setBgAni',scriptType:commandType.perform_bgAni,scriptFunction:setBgAni},
