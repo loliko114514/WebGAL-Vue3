@@ -38,6 +38,7 @@ onMounted(()=>{
 .root{
   height: 900px;
   width: 1600px;
+  background-color: black;
 }
 *{
   margin: 0;
