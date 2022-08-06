@@ -1,34 +1,34 @@
 <template>
-    <div class="Title_main" :style="{'background-image':`url(${titleBg})`}" >
-      <div
-          id="play_title_bgm_target"
-          @click="() => {
-            playBgm(guiStore.guiState.titleBgm);
-          }"
-        />
-      <div class="Title_buttonList">
-        <div class="Title_button" id="leftTitleButton" @click="hideTitle()">
-          <div class="Title_button_text Title_button_text_up">开始游戏</div>
-          <div class="Title_button_text">START</div>
-        </div>
-        <div class="Title_button" @click="continueGame()">
-          <div class="Title_button_text Title_button_text_up">继续游戏</div>
-          <div class="Title_button_text">CONTINUE</div>
-        </div>
-        <div class="Title_button" @click="showMenuOption()">
-          <div class="Title_button_text Title_button_text_up">游戏选项</div>
-          <div class="Title_button_text">OPTIONS</div>
-        </div>
-        <div class="Title_button" @click="onLoadGame()">
-          <div class="Title_button_text Title_button_text_up">读取存档</div>
-          <div class="Title_button_text">LOAD</div>
-        </div>
-        <div class="Title_button" @click="exit()">
-          <div class="Title_button_text Title_button_text_up">退出游戏</div>
-          <div class="Title_button_text">EXIT</div>
-        </div>
+  <div v-if="guiStore.guiState.showTitle" class="Title_main" :style="{'background-image':`url(${titleBg})`}" >
+    <div
+        id="play_title_bgm_target"
+        @click="() => {
+          playBgm(guiStore.guiState.titleBgm);
+        }"
+      />
+    <div class="Title_buttonList">
+      <div class="Title_button" id="leftTitleButton" @click="hideTitle()">
+        <div class="Title_button_text Title_button_text_up">开始游戏</div>
+        <div class="Title_button_text">START</div>
+      </div>
+      <div class="Title_button" @click="continueGame()">
+        <div class="Title_button_text Title_button_text_up">继续游戏</div>
+        <div class="Title_button_text">CONTINUE</div>
+      </div>
+      <div class="Title_button" @click="showMenuOption()">
+        <div class="Title_button_text Title_button_text_up">游戏选项</div>
+        <div class="Title_button_text">OPTIONS</div>
+      </div>
+      <div class="Title_button" @click="onLoadGame()">
+        <div class="Title_button_text Title_button_text_up">读取存档</div>
+        <div class="Title_button_text">LOAD</div>
+      </div>
+      <div class="Title_button" @click="exit()">
+        <div class="Title_button_text Title_button_text_up">退出游戏</div>
+        <div class="Title_button_text">EXIT</div>
       </div>
     </div>
+  </div>
 </template>                
   
 <script setup lang='ts'>
@@ -54,7 +54,7 @@ const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
     console.log("继续游戏")
   }
   const showMenuOption = ():void=>{
-    guiStore.setShowMenuPanel(true)
+    guiStore.guiState.showMenuPanel = true
   }
   const onLoadGame = ():void=>{
     console.log("读取存档")

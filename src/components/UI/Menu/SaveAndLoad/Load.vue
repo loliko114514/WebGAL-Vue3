@@ -1,11 +1,28 @@
 <template>
-  <div>
-
+  <div class="Save_Load_main">
+    <div class="Save_Load_top">
+      <div class="Save_Load_title">
+        <div class="Save_title_text">读档</div>
+      </div>
+      <div class="Save_Load_top_buttonList">
+        <Page/>
+      </div>
+    </div>
+    <div
+      class="Save_Load_content"
+      :id="'Save_content_page_' + userdataStore.userDataState.optionData.slPage"
+    >
+      <ShowLoad/>
+    </div>
   </div>
 </template>
 
 <script setup lang='ts'>
+import Page from './Page.vue';
+import { UserDataStore } from '../../../../store/UserDataStore';
+import ShowLoad from './ShowLoad.vue';
 
+const userdataStore = UserDataStore()
 </script>
 
 <style lang="scss" scoped>
@@ -39,4 +56,28 @@
   display: flex;
   justify-content: center;
 }
+
+.Save_title_text {
+  height: 100%;
+  font-size: 125%;
+  font-weight: bold;
+  color: transparent;
+  background: linear-gradient(135deg, #77428D 0%, #B28FCE 100%);
+  text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.5);
+  -webkit-background-clip: text;
+}
+.Save_Load_top_buttonList {
+  height: 100%;
+  display: flex;
+  padding: 0 0 0 2em;
+}
+.Save_Load_content {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 </style>

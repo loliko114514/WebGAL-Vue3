@@ -6,7 +6,7 @@ import { ISentence } from "../interface/coreInterface/sceneInterface";
  * @param sentence
  */
  export const setBgAni = (sentence: ISentence): IPerform => {
-  const content = sentence.content;
+  const content = sentence.content + ' forwards';
   setTimeout(() => {
     const mainBg = document.getElementById('MainStage_bg_MainContainer');
     if (mainBg) {

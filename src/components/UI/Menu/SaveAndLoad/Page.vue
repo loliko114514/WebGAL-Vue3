@@ -3,7 +3,7 @@
   v-for="i in 20"
   @click="()=>{
     userdateStore.setSlPage(i)
-    controllerStore.setStorage()
+    setStorage()
   }
   "
   :key="'Save_element_page'+i"
@@ -15,8 +15,8 @@
 <script setup lang='ts'>
 import { UserDataStore } from '../../../../store/UserDataStore';
 import { ControllerStore } from '../../../../store/ControllerStore';
+import { setStorage } from '../../../../controller/storage/storageController';
 const userdateStore = UserDataStore()
-const controllerStore = ControllerStore()
 </script>
 
 <style lang="scss" scoped>

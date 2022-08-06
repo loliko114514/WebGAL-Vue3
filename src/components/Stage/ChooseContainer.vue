@@ -7,7 +7,7 @@
       jmp(e[1])
     }
     unmountPerform('choose')
-    guistore.guiState.showChoose = false
+    guiStore.guiState.showChoose = false
   }
   ">
     {{e[0]}}
@@ -26,7 +26,6 @@ import { GuiStore } from '../../store/GuiStore';
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
 const chooselist = computed(()=>controllerStore.chooselist)
-const guistore = GuiStore()
   
 </script>
 

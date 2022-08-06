@@ -1,6 +1,6 @@
 <template>
   <div class="MainStage_main">
-    <div class="MainStage_main_container" :style="{'width':'100%','height':'100%','top':'0'}">
+    <div class="MainStage_main_container" :style="{'width':'100%','height':stageHeight,'top':top}">
       <div :key="'bgOld' + stageState.oldBgName"
         id="MainStage_bg_OldContainer"
         class="MainStage_oldBgContainer"
@@ -12,8 +12,8 @@
       <FigureContainer/>  
     </div>
     <FullScreenPerform/>
-    <TextBox v-if="guiStore.guiState.showTextBox && stageStore.stageState.enableFilm===''"/>
-    <TextBoxFilm v-if="guiStore.guiState.showTextBox && stageStore.stageState.enableFilm!==''"/>
+    <TextBox v-if="showTextBox && stageState.enableFilm===''"/>
+    <TextBoxFilm v-if="showTextBox && stageState.enableFilm!==''"/>
     <AudioContainer/>
     <div @click="()=>{
       if(!guiStore.guiState.showTextBox){
@@ -40,8 +40,22 @@ import { computed } from 'vue';
 import { nextSentence } from '../../controller/gamePlay/nextSentence';
 const stageStore = StageStore()
 const guiStore = GuiStore()
+const showTextBox = computed(()=>guiStore.guiState.showTextBox)
 const stageState = computed(()=>stageStore.stageState)
-
+let stageHeight = computed(()=>{
+  if(stageState.value.enableFilm!==''){
+    return '76%'
+  }else{
+    return '100%'
+  }
+})
+let top = computed(()=>{
+  if(stageState.value.enableFilm!==''){
+    return '12%'
+  }else{
+    return '0'
+  }
+})
 
 
 </script>
@@ -78,7 +92,6 @@ const stageState = computed(()=>stageStore.stageState)
   width: 100%;
   height: 100%;
   z-index: 1;
-  animation: MainStage_showBgSoftly 1s forwards ease-in-out;
 }
 
 .MainStage_bgContainer_Settled {

@@ -1,9 +1,8 @@
 <template>
-  <div class="Menu_main">
+  <div v-if="guiStore.guiState.showMenuPanel" class="Menu_main">
     <div class="Menu_TagContent">
       <Save v-if="currentMenuTag===MenuPanelTag.Save" />
-      <!-- <template  v-if="currentMenuTag===MenuPanelTag.Load">
-      </template> -->
+      <Load v-if="currentMenuTag===MenuPanelTag.Load" />
       <Options v-if="currentMenuTag===MenuPanelTag.Option"/>
     </div>
     <MenuPanel/>
@@ -14,10 +13,12 @@
 import { ref } from 'vue';
 import MenuPanel from './MenuPanel/MenuPanel.vue';
 import Save from './SaveAndLoad/Save.vue';
+import Load from './SaveAndLoad/Load.vue';
 import Options from './Options/Options.vue';
 import { GuiStore } from "../../../store/GuiStore";
 import { MenuPanelTag }from "../../../interface/stateInterface/guiInterface"
 import { computed } from '@vue/reactivity';
+
 
 const guiStore = GuiStore()
 const currentMenuTag = computed(()=>{

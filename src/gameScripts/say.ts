@@ -4,6 +4,7 @@ import { ISentence } from "../interface/coreInterface/sceneInterface";
 import { ControllerStore } from "../store/ControllerStore";
 import { StageStore } from "../store/StageStore";
 import { UserDataStore } from "../store/UserDataStore";
+import { playVocal } from "./playVocal";
 
 export const say = (sentence: ISentence): IPerform => {
   const stageStore = StageStore()
@@ -57,7 +58,7 @@ export const say = (sentence: ISentence): IPerform => {
       showName = '';
     }
     if (e.key === 'vocal') {
-      // playVocal(sentence);
+      playVocal(sentence);
     }
   }
   stageStore.stageState.showName = showName as string

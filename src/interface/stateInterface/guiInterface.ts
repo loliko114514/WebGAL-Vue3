@@ -5,6 +5,7 @@ export interface IGuiState {
   showStarter: boolean; // 是否显示初始界面（用于使得bgm可以播放)
   showTitle: boolean; // 是否显示标题界面
   showMenuPanel: boolean; // 是否显示Menu界面
+  showPanel:boolean;//电影模式
   showTextBox: boolean;
   currentMenuTag: MenuPanelTag; // 当前Menu界面的选项卡
   showBacklog: boolean;

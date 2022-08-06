@@ -9,6 +9,7 @@ export const GuiStore = defineStore('GuiStore',{
           showStarter: true,
           showTitle: true,
           showMenuPanel: false,
+          showPanel:false,
           showTextBox: true,
           currentMenuTag: MenuPanelTag.Option,
           titleBg: 'Title',

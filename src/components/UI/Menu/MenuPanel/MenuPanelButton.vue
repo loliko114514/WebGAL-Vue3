@@ -12,7 +12,6 @@
 
 <script setup lang='ts'>
 import { ref } from 'vue'
-import { IMenuPanel } from '../../../interface/componentsInterface/menuPanelInterface'
 import MenuIconMap from "./MenuIconMap.vue"
 
 interface IMenuPanel {

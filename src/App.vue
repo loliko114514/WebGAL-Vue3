@@ -1,14 +1,18 @@
 <template>
 <div ref="root" class="root">
-  <Title v-if="guiStore.guiState.showTitle"/>
-  <Menu v-if="guiStore.guiState.showMenuPanel"/>
+  <Title />
+  <Menu />
   <MainStage />
+  <ButtomControlPanel />
+  <ButtomControlPanelFilm />
 </div>
 </template>
 <script setup lang="ts">
 import Title from './components/UI/Title.vue'
 import Menu from './components/UI/Menu/Menu.vue'
 import MainStage from './components/Stage/mainStage.vue'
+import ButtomControlPanel from './components/UI/BottomControlPanel/ButtomControlPanel.vue'
+import ButtomControlPanelFilm from './components/UI/BottomControlPanel/ButtomControlPanelFilm.vue'
 import { GuiStore } from './store/GuiStore'
 import { ControllerStore } from './store/ControllerStore'
 import { onMounted, ref } from 'vue'
