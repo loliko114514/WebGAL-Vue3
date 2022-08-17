@@ -5,6 +5,7 @@
   <MainStage />
   <ButtomControlPanel />
   <ButtomControlPanelFilm />
+  <Backlog />
 </div>
 </template>
 <script setup lang="ts">
@@ -13,6 +14,7 @@ import Menu from './components/UI/Menu/Menu.vue'
 import MainStage from './components/Stage/mainStage.vue'
 import ButtomControlPanel from './components/UI/BottomControlPanel/ButtomControlPanel.vue'
 import ButtomControlPanelFilm from './components/UI/BottomControlPanel/ButtomControlPanelFilm.vue'
+import Backlog from './components/UI/Backlog/Backlog.vue'
 import { GuiStore } from './store/GuiStore'
 import { ControllerStore } from './store/ControllerStore'
 import { onMounted, ref } from 'vue'

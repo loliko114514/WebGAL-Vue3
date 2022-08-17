@@ -17,15 +17,24 @@
           <div v-if="backlogItem.currentStageState.showName !== ''" class="backlog_item_content_name">
             {{backlogItem.currentStageState.showName}}
           </div>
+          <div class="backlog_item_button_list">
+            <div @click="(e)=>{
+            jumpFromBacklog(i);
+            e.preventDefault();
+            e.stopPropagation();
+            }"
+            class="backlog_item_button_element">
+              <n-icon size = "23" color="#ffffff" :component="ReturnDownBackOutline"></n-icon>
+            </div>
+            <div @click="backlogvocal(i)" class="backlog_item_button_element">
+              <n-icon size="23" color="#ffffff" :component="ReturnDownBackOutline"/>
+            </div>
+          </div>
         </div>
-        <div @click="(e)=>{
-        jumpFromBacklog(i);
-        e.preventDefault();
-        e.stopPropagation();
-        }"
-        class="backlog_item_button_element">
-          <n-icon size = "23" color="#ffffff" :component="ReturnDownBackOutline"></n-icon>
+        <div class="backlog_item_content">
+          <span class="backlog_item_content_text">{{backlogItem.currentStageState.showText}}</span>
         </div>
+        <audio :id="'backlog_audio_play_element_' + i" :src="backlogItem.currentStageState.vocal"/>
       </div>
     </div>
   </div>
@@ -38,9 +47,20 @@ import { ReturnDownBackOutline
 import { ControllerStore } from '../../../store/ControllerStore';
 import { GuiStore } from '../../../store/GuiStore';
 import { jumpFromBacklog } from '../../../controller/storage/jumpFromBacklog';
+import { UserDataStore } from '../../../store/UserDataStore';
 
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
+const backlogvocal = (i:number)=>{
+  const backlog_audio_element: any = document.getElementById('backlog_audio_play_element_' + i);
+  if (backlog_audio_element) {
+    backlog_audio_element.currentTime = 0;
+    const userDataStore = UserDataStore()
+    const mainVol = userDataStore.userDataState.optionData.volumeMain;
+    backlog_audio_element.volume = mainVol * 0.01 * userDataStore.userDataState.optionData.vocalVolume * 0.01;
+    backlog_audio_element.play();
+  }
+}
 </script>
 
 <style lang="scss" scoped>
