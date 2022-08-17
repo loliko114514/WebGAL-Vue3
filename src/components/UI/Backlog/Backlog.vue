@@ -11,8 +11,21 @@
       <div v-for="(backlogItem,i) in controllerStore.runtime_currentBacklog"
        class="backlog_item"
        :style="{'animationDelay':`${20 * (controllerStore.runtime_currentBacklog.length - i)}ms`}"
+       :key="'backlogItem' + backlogItem.currentStageState.showText + backlogItem.saveScene.currentSentenceId"
        >
-         
+        <div class="backlog_func_area">
+          <div v-if="backlogItem.currentStageState.showName !== ''" class="backlog_item_content_name">
+            {{backlogItem.currentStageState.showName}}
+          </div>
+        </div>
+        <div @click="(e)=>{
+        jumpFromBacklog(i);
+        e.preventDefault();
+        e.stopPropagation();
+        }"
+        class="backlog_item_button_element">
+          <n-icon size = "23" color="#ffffff" :component="ReturnDownBackOutline"></n-icon>
+        </div>
       </div>
     </div>
   </div>
@@ -24,6 +37,7 @@ import { ReturnDownBackOutline
  } from '@vicons/ionicons5'
 import { ControllerStore } from '../../../store/ControllerStore';
 import { GuiStore } from '../../../store/GuiStore';
+import { jumpFromBacklog } from '../../../controller/storage/jumpFromBacklog';
 
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
