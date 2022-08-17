@@ -1,14 +1,14 @@
 <template>
   <div v-if="guiStore.guiState.showBacklog" class="Backlog_main" >
     <div class="backlog_top">
-      <n-icon class="backlog_top_icon" color="#ffffff" size="4em" :component="ReturnDownBackOutline" @click="()=>{
+      <n-icon class="backlog_top_icon" color="#ffffff" size="4em" :component="ArrowBackOutline" @click="()=>{
         guiStore.guiState.showBacklog = false;
         guiStore.guiState.showTextBox = true;
       }"/>
       <div class="backlog_title">回想</div>
     </div>
     <div class="backlog_content">
-      <div v-for="(backlogItem,i) in controllerStore.runtime_currentBacklog"
+      <div v-for="(backlogItem,i) in backlogItemList"
        class="backlog_item"
        :style="{'animationDelay':`${20 * (controllerStore.runtime_currentBacklog.length - i)}ms`}"
        :key="'backlogItem' + backlogItem.currentStageState.showText + backlogItem.saveScene.currentSentenceId"
@@ -24,10 +24,10 @@
             e.stopPropagation();
             }"
             class="backlog_item_button_element">
-              <n-icon size = "23" color="#ffffff" :component="ReturnDownBackOutline"></n-icon>
+              <n-icon size = "23" color="#ffffff" :component="ArrowUndoOutline"></n-icon>
             </div>
             <div @click="backlogvocal(i)" class="backlog_item_button_element">
-              <n-icon size="23" color="#ffffff" :component="ReturnDownBackOutline"/>
+              <n-icon size="23" color="#ffffff" :component="VolumeMediumOutline"/>
             </div>
           </div>
         </div>
@@ -42,15 +42,26 @@
 
 <script setup lang='ts'>
 import { NIcon } from 'naive-ui'
-import { ReturnDownBackOutline
+import { ArrowBackOutline,
+ArrowUndoOutline,
+VolumeMediumOutline
  } from '@vicons/ionicons5'
 import { ControllerStore } from '../../../store/ControllerStore';
 import { GuiStore } from '../../../store/GuiStore';
 import { jumpFromBacklog } from '../../../controller/storage/jumpFromBacklog';
 import { UserDataStore } from '../../../store/UserDataStore';
+import { computed } from '@vue/reactivity';
+import { isTemplateElement } from '@babel/types';
 
 const guiStore = GuiStore()
 const controllerStore = ControllerStore()
+const backlogItemList = computed(()=>{
+  let list = []
+  for (let item of controllerStore.runtime_currentBacklog){
+    list.unshift(item)
+  }
+  return list
+}) 
 const backlogvocal = (i:number)=>{
   const backlog_audio_element: any = document.getElementById('backlog_audio_play_element_' + i);
   if (backlog_audio_element) {

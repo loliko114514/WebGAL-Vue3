@@ -58,5 +58,6 @@ export const jumpFromBacklog = (index: number) => {
   const guiStore = GuiStore()
   // 关闭backlog界面
   guiStore.guiState.showBacklog = false
+  guiStore.guiState.showChoose = false
   guiStore.guiState.showTextBox = true
 }
