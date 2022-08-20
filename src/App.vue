@@ -9,7 +9,7 @@
 </div>
 </template>
 <script setup lang="ts">
-import Title from './components/UI/Title.vue'
+import Title from './components/UI/Title/Title.vue'
 import Menu from './components/UI/Menu/Menu.vue'
 import MainStage from './components/Stage/mainStage.vue'
 import ButtomControlPanel from './components/UI/BottomControlPanel/ButtomControlPanel.vue'

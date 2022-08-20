@@ -8,36 +8,33 @@
       />
     <div class="Title_buttonList">
       <div class="Title_button" id="leftTitleButton" @click="hideTitle()">
-        <div class="Title_button_text Title_button_text_up">开始游戏</div>
-        <div class="Title_button_text">START</div>
+        <div class="Title_button_text Title_button_text_up">TRUE END</div>
       </div>
       <div class="Title_button" @click="continueGame()">
         <div class="Title_button_text Title_button_text_up">继续游戏</div>
-        <div class="Title_button_text">CONTINUE</div>
+        <div class="Title_button_text Title_button_text_up border">继续游戏</div>
       </div>
       <div class="Title_button" @click="showMenuOption()">
         <div class="Title_button_text Title_button_text_up">游戏选项</div>
-        <div class="Title_button_text">OPTIONS</div>
       </div>
       <div class="Title_button" @click="onLoadGame()">
         <div class="Title_button_text Title_button_text_up">读取存档</div>
-        <div class="Title_button_text">LOAD</div>
       </div>
       <div class="Title_button" @click="exit()">
         <div class="Title_button_text Title_button_text_up">退出游戏</div>
-        <div class="Title_button_text">EXIT</div>
       </div>
     </div>
   </div>
 </template>                
   
 <script setup lang='ts'>
-import { GuiStore } from '../../store/GuiStore'
-import { ControllerStore } from '../../store/ControllerStore';
+import TitleButton from './TitleButton.vue';
+import { GuiStore } from '../../../store/GuiStore'
+import { ControllerStore } from '../../../store/ControllerStore';
 import { computed, onMounted, ref, watch } from 'vue';
-import { nextSentence } from '../../controller/gamePlay/nextSentence';
-import { playBgm } from '../../controller/stage/playBgm';
-import { StageStore } from '../../store/StageStore';
+import { nextSentence } from '../../../controller/gamePlay/nextSentence';
+import { playBgm } from '../../../controller/stage/playBgm';
+import { StageStore } from '../../../store/StageStore';
 const guiStore = GuiStore()
 const stageStore = StageStore()
 const controllerStore = ControllerStore()
@@ -82,21 +79,22 @@ const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
     font-family: "思源宋体", serif;
     display: flex;
     position: absolute;
-    bottom: 0;
-    height: 12%;
+    top: 40%;
+    left: 12%;
+    height: 60%;
     background: rgba(0, 0, 0, 0.4);
-    width: 100%;
+    width: 20%;
     justify-content: space-evenly;
     justify-items: center;
     align-items: center;
-    flex-flow: row;
+    flex-flow:column;
     letter-spacing: 0.25em;
     transition: background 0.7s;
 }
 
-.Title_buttonList:hover {
-    background: rgba(0, 0, 0, 0.6);
-}
+// .Title_buttonList:hover {
+//     background: rgba(0, 0, 0, 0.6);
+// }
 
 .Title_button {
     font-weight: bold;
@@ -109,11 +107,11 @@ const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
     //text-shadow: 0 0 10px rgba(0, 0, 0, 0.75);
 }
 
-.Title_button:hover {
-    //background-color: rgba(255, 255, 255, 0.1);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 1);
-    transform: scale(1.025, 1.025) translate(0, -0.05em);
-}
+// .Title_button:hover {
+//     //background-color: rgba(255, 255, 255, 0.1);
+//     text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+//     transform: scale(1.025, 1.025) translate(0, -0.05em);
+// }
 
 
 .Title_button_text {
@@ -122,6 +120,10 @@ const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
     background: linear-gradient(135deg, #fdfbfb 0%, #dcddde 100%);
     -webkit-background-clip: text;
     padding: 0 0.5em 0 0.5em;
+}
+.border{
+  -webkit-text-stroke:1px #115abe;
+  z-index: 0;
 }
 
 .Title_button_text_up {
