@@ -47,6 +47,7 @@ onMounted(()=>{
   background-color: black;
 }
 *{
+  font-family: 'WebgalUI',sans-serif;
   margin: 0;
   padding: 0;
   user-select:none;
