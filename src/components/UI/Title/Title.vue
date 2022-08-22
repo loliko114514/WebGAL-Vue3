@@ -7,25 +7,9 @@
         }"
       />
     <div class="Title_buttonList">
-      <div class="Title_button" id="leftTitleButton" @click="hideTitle()">
-        <div class="Title_button_text" >TRUE END</div>
-        <div class="border">TRUE END</div>
-      </div>
-      <div class="Title_button" @click="continueGame()">
-        <div class="Title_button_text">继续游戏</div>
-        <div class="border">继续游戏</div>
-      </div>
-      <div class="Title_button" @click="showMenuOption()">
-        <div class="Title_button_text">游戏选项</div>
-        <div class="border">游戏选项</div>
-      </div>
-      <div class="Title_button" @click="onLoadGame()">
-        <div class="Title_button_text">读取存档</div>
-        <div class="border">读取存档</div>
-      </div>
-      <div class="Title_button" @click="exit()" @mouseenter="enter(0)" @mouseleave="leave(0)">
-        <div class="Title_button_text" :class="{Title_button_text_hover:hoverlist[0]}">退出游戏</div>
-        <div class="border" :class="{border_hover:hoverlist[0]}">退出游戏</div>
+      <div v-for="(item,i) in titlelist" class="Title_button" id="leftTitleButton" @click="item.fun()" @mouseenter="()=>{item.hover = true}" @mouseleave="()=>{item.hover = false}">
+        <div class="Title_button_text" :class="{Title_button_text_hover:item.hover}">{{item.text}}</div>
+        <div class="border" :class="{border_hover:item.hover}">{{item.text}}</div>
       </div>
     </div>
   </div>
@@ -43,33 +27,59 @@ const guiStore = GuiStore()
 const stageStore = StageStore()
 const controllerStore = ControllerStore()
 const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
-  const hideTitle = ():void=>{
-    stageStore.stageState.bgm = ''
-    guiStore.guiState.showTitle = false
-    if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
-    controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
-      nextSentence()
-    }
+const beginGame = ():void=>{
+  stageStore.stageState.bgm = ''
+  guiStore.guiState.showTitle = false
+  if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
+  controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
+    nextSentence()
   }
-  const continueGame = ():void=>{
-    console.log("继续游戏")
-  }
-  const showMenuOption = ():void=>{
-    guiStore.guiState.showMenuPanel = true
-  }
-  const onLoadGame = ():void=>{
-    console.log("读取存档")
-  }
-  const exit = ():void=>{
-    console.log("退出游戏")
-  }
-const hoverlist = reactive([] as boolean[])
-const enter = (i:number)=>{
-  hoverlist[i] = true
 }
-const leave = (i:number)=>{
-  hoverlist[i] = false
+const continueGame = ():void=>{
+  console.log("继续游戏")
 }
+const showMenuOption = ():void=>{
+  guiStore.guiState.showMenuPanel = true
+}
+const onLoadGame = ():void=>{
+  console.log("读取存档")
+}
+const exit = ():void=>{
+  console.log("退出游戏")
+}
+interface TitleSelect {
+  hover:boolean,
+  fun:Function,
+  text:string
+}
+const titlelist:TitleSelect[] = reactive([
+  {
+    hover:false,
+    fun:beginGame,
+    text:"开始游戏"
+  },
+  {
+    hover:false,
+    fun:continueGame,
+    text:"继续游戏"
+  },
+  {
+    hover:false,
+    fun:showMenuOption,
+    text:"游戏选项"
+  },
+  {
+    hover:false,
+    fun:onLoadGame,
+    text:"读取存档"
+  },
+  {
+    hover:false,
+    fun:exit,
+    text:"退出游戏"
+  },
+])
+
 
 </script>
   
@@ -92,7 +102,7 @@ const leave = (i:number)=>{
     top: 40%;
     left: 12%;
     height: 50%;
-    background: rgba(0, 0, 0, 0.4);
+    // background: rgba(0, 0, 0, 0.4);
     width: 20%;
     flex-flow:column;
     letter-spacing: 0.25em;
@@ -126,7 +136,7 @@ const leave = (i:number)=>{
 .Title_button_text {
     font-size: 215%;
     color: transparent;
-    background: linear-gradient(135deg, #fdfbfb 0%, #dcddde 100%);
+    background: linear-gradient(135deg, #115abe 0%, #115abe 100%);
     -webkit-background-clip: text;
     padding: 0 0.5em 0 0.5em;
     font-weight:900;
@@ -137,7 +147,7 @@ const leave = (i:number)=>{
 }
 .Title_button_text_hover{
   color: transparent;
-  background: linear-gradient(135deg, #115abe 0%, #115abe 100%);
+  background: linear-gradient(135deg, #fdfbfb 0%, #fdfbfb 100%);
   -webkit-background-clip: text;
 }
 .border{
@@ -147,8 +157,8 @@ const leave = (i:number)=>{
   position:relative;
   top: 0;
   left: 0;
-  -webkit-text-stroke:3px #115abe;
-  text-shadow: 0 0 10px #115abe;
+  -webkit-text-stroke:3px #fdfbfb;
+  text-shadow: 0 0 10px #fdfbfb;
   z-index: 0;
   position:absolute;
   top: 0;
@@ -156,8 +166,8 @@ const leave = (i:number)=>{
   
 }
 .border_hover{
-  -webkit-text-stroke:3px #fdfbfb;
-  text-shadow: 0 0 10px #fdfbfb;
+  -webkit-text-stroke:3px #115abe;
+  text-shadow: 0 0 10px #115abe;
   
 }
 </style>
