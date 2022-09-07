@@ -35,6 +35,7 @@ const beginGame = ():void=>{
     nextSentence()
   }
 }
+const test = 1
 const continueGame = ():void=>{
   console.log("继续游戏")
 }
