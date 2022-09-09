@@ -59,24 +59,27 @@
               userdataStore.userDataState.optionData.volumeMain = parseInt(event.target.value)
               setStorage();
               userdataStore.setVolume();
+              setVolume();
             }"
           />
         </NormalOption>
         <NormalOption key="option5" title="语音音量">
-          <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
+          <OptionSlider :initValue="userdataStore.userDataState.optionData.vocalVolume"
             uniqueID="语音音量" :onChange="(event:any) => {
               userdataStore.userDataState.optionData.vocalVolume = parseInt(event.target.value)
               setStorage();
               userdataStore.setVolume();
+              setVolume();
             }"
           />
         </NormalOption>
         <NormalOption key="option6" title="背景音乐音量">
-          <OptionSlider :initValue="userdataStore.userDataState.optionData.volumeMain"
+          <OptionSlider :initValue="userdataStore.userDataState.optionData.bgmVolume"
             uniqueID="背景音乐音量" :onChange="(event:any) => {
               userdataStore.userDataState.optionData.bgmVolume = parseInt(event.target.value)
               setStorage();
               userdataStore.setVolume();
+              setVolume();
             }"
           />
         </NormalOption>
@@ -95,10 +98,10 @@ import { UserDataStore } from '../../../../store/UserDataStore'
 import { ControllerStore } from '../../../../store/ControllerStore';
 import { ref } from 'vue';
 import { setStorage } from '../../../../controller/storage/storageController';
+import { setVolume } from '../../../../controller/stage/setVolume';
 
 const userdataStore = UserDataStore()
 const controllerStore = ControllerStore()
-
 </script>
 
 <style lang="scss" scoped>

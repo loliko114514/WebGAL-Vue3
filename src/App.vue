@@ -1,5 +1,6 @@
 <template>
 <div ref="root" class="root">
+  <InterludePage />
   <Title />
   <Menu />
   <MainStage />
@@ -15,6 +16,7 @@ import MainStage from './components/Stage/mainStage.vue'
 import ButtomControlPanel from './components/UI/BottomControlPanel/ButtomControlPanel.vue'
 import ButtomControlPanelFilm from './components/UI/BottomControlPanel/ButtomControlPanelFilm.vue'
 import Backlog from './components/UI/Backlog/Backlog.vue'
+import InterludePage from './components/UI/interlude/InterludePage.vue'
 import { GuiStore } from './store/GuiStore'
 import { ControllerStore } from './store/ControllerStore'
 import { onMounted, ref } from 'vue'

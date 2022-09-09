@@ -11,6 +11,7 @@ export const GuiStore = defineStore('GuiStore',{
           showMenuPanel: false,
           showPanel:false,
           showTextBox: true,
+          showinterlude:false,
           currentMenuTag: MenuPanelTag.Option,
           titleBg: 'Title',
           titleBgm: 'Title',

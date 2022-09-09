@@ -1,6 +1,6 @@
 <template>
   <div class="Option_WebGAL_slider">
-    <input :id="props.uniqueID" type="range" :onChange="props.onChange"/>
+    <input :id="props.uniqueID" type="range" :onChange="props.onChange" :value="initValue"/>
   </div>
 </template>
 

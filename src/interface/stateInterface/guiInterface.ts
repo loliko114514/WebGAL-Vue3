@@ -7,6 +7,7 @@ export interface IGuiState {
   showMenuPanel: boolean; // 是否显示Menu界面
   showPanel:boolean;//电影模式
   showTextBox: boolean;
+  showinterlude:boolean;
   currentMenuTag: MenuPanelTag; // 当前Menu界面的选项卡
   showBacklog: boolean;
   titleBgm: string; // 标题背景音乐

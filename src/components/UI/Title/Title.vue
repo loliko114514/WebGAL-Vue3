@@ -3,6 +3,7 @@
     <div
         id="play_title_bgm_target"
         @click="() => {
+          setVolume()
           playBgm(guiStore.guiState.titleBgm);
         }"
       />
@@ -19,21 +20,41 @@
 import TitleButton from './TitleButton.vue';
 import { GuiStore } from '../../../store/GuiStore'
 import { ControllerStore } from '../../../store/ControllerStore';
+import { StageStore } from '../../../store/StageStore';
+import { UserDataStore } from '../../../store/UserDataStore';
 import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { nextSentence } from '../../../controller/gamePlay/nextSentence';
 import { playBgm } from '../../../controller/stage/playBgm';
-import { StageStore } from '../../../store/StageStore';
+import { setVolume } from '../../../controller/stage/setVolume';
 const guiStore = GuiStore()
 const stageStore = StageStore()
 const controllerStore = ControllerStore()
+const userdataStore = UserDataStore()
 const titleBg = computed(()=>guiStore.$state.guiState.titleBg)
+const bgmvolume = userdataStore.userDataState.optionData.bgmVolume
 const beginGame = ():void=>{
-  stageStore.stageState.bgm = ''
-  guiStore.guiState.showTitle = false
-  if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
-  controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
-    nextSentence()
-  }
+  guiStore.guiState.showinterlude = true
+  setTimeout(() => {
+    stageStore.stageState.bgm = ''
+    guiStore.guiState.showTitle = false
+    if(controllerStore.runtime_currentSceneData.currentSentenceId === 0&&
+    controllerStore.runtime_currentSceneData.currentScene.sceneName === 'start.txt'){
+      nextSentence()
+    }
+  }, 1500);
+  let interval = setInterval(()=>{
+    userdataStore.userDataState.optionData.bgmVolume = userdataStore.userDataState.optionData.bgmVolume - (bgmvolume/100)
+    setVolume()
+    if(userdataStore.userDataState.optionData.bgmVolume<=0)
+    {
+      clearInterval(interval)
+      userdataStore.userDataState.optionData.bgmVolume = bgmvolume
+      setVolume()
+    }
+  },10)
+  setTimeout(() => {
+    guiStore.guiState.showinterlude = false
+  },3000)
 }
 const continueGame = ():void=>{
   console.log("继续游戏")
