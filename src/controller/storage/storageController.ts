@@ -6,34 +6,32 @@ import { UserDataStore } from "../../store/UserDataStore";
 /**
  * 写入本地存储
  */
-export const setStorage = ()=>{
-  debounce(()=>{
-    const controllerStore = ControllerStore()
-    const userDataState = UserDataStore().userDataState
-    localforage.setItem(controllerStore.gameInfo.gameKey, userDataState).then(() => {
-      console.log('写入本地存储')
-    });  
-  },100)
-}
+export const setStorage = debounce(()=>{
+  const controllerStore = ControllerStore()
+  const userDataState = UserDataStore().userDataState
+  const userData = JSON.parse(JSON.stringify(userDataState))  // 去除proxy代理属性
+  localforage.setItem(controllerStore.gameInfo.gameKey,userData).then(() => {
+    console.log('写入本地存储')
+  });  
+},100)
 
 /**
  * 从本地存储获取数据
  */
- export const getStorage = ()=>{
-  debounce(()=>{
-    const userDataStore = UserDataStore()
-    const controllerStore = ControllerStore()
-    localforage.getItem(controllerStore.gameInfo.gameKey).then((newUserData) => {
-      // 如果没有数据或者属性不完全，重新初始化
-      if (!newUserData || !checkUserDataProperty(newUserData)) {
-        console.log('现在重置数据');
-        setStorage();
-        return;
-      }
-      userDataStore.resetUserData(newUserData as IUserData)
-    });  
-  },100)
-}
+ export const getStorage = debounce(()=>{
+  const userDataStore = UserDataStore()
+  const controllerStore = ControllerStore()
+  localforage.getItem(controllerStore.gameInfo.gameKey).then((newUserData) => {
+    // 如果没有数据或者属性不完全，重新初始化
+    if (!newUserData || !checkUserDataProperty(newUserData)) {
+      console.log('现在重置数据');
+      setStorage();
+      return;
+    }
+    userDataStore.resetUserData(newUserData as IUserData)
+  });  
+},100)
+
 
 /**
  * 同步本地存储
@@ -41,7 +39,9 @@ export const setStorage = ()=>{
  export const syncStorageFast = ()=>{
   const userDataStore = UserDataStore()
   const controllerStore = ControllerStore()
-  localforage.setItem(controllerStore.gameInfo.gameKey,userDataStore.userDataState).then(()=>{
+  const userDataState = userDataStore.userDataState
+  const userData = JSON.parse(JSON.stringify(userDataState))  // 去除proxy代理属性
+  localforage.setItem(controllerStore.gameInfo.gameKey,userData).then(()=>{
     localforage.getItem(controllerStore.gameInfo.gameKey).then((newUserData) => {
       // 如果没有数据，初始化
       if (!newUserData) {
